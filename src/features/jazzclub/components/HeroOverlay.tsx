@@ -1,0 +1,131 @@
+"use client";
+
+import Link from "next/link";
+import { CO_HOST_URL } from "../data/events";
+import { JazzclubPlaque } from "./JazzclubPlaque";
+
+export type HeroPhase = "loading" | "intro" | "settling" | "idle";
+
+type Props = {
+  phase: HeroPhase;
+  /** The plaque has started (or finished) settling into place. */
+  showPlaque: boolean;
+  /** Settle quickly — skip, returning visit or reduced motion. */
+  fastSettle: boolean;
+  /** 0 idle, 1 Explore CTA pressed, 2 hero exiting. */
+  exitStage: 0 | 1 | 2;
+  onSkip: () => void;
+  onExplore: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+};
+
+/** Where "Explore Events" goes — a dedicated page, never an in-page scroll. */
+export const EXPLORE_URL = "/events/explore";
+
+/**
+ * DOM layer above the WebGL canvas. The plaque and CTAs live here rather
+ * than in the scene so they stay crisp, selectable and keyboard accessible.
+ */
+export function HeroOverlay({
+  phase,
+  showPlaque,
+  fastSettle,
+  exitStage,
+  onSkip,
+  onExplore,
+}: Props) {
+  const exiting = exitStage === 2;
+  const duration = fastSettle ? "duration-200" : "duration-[900ms]";
+
+  return (
+    <div
+      className={`pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 transition-[opacity,transform] duration-300 ease-out ${
+        exiting ? "scale-[0.985] opacity-0" : "opacity-100"
+      }`}
+    >
+      {/* Soft scrim behind the copy only — the ring stays visible. */}
+      <div
+        aria-hidden="true"
+        className={`absolute h-[min(560px,110vh)] w-[min(620px,130vw)] rounded-full bg-[radial-gradient(circle,rgba(8,8,10,0.82)_0%,rgba(8,8,10,0.6)_40%,rgba(8,8,10,0.2)_65%,rgba(8,8,10,0)_78%)] transition-opacity ${duration} ${
+          showPlaque ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      <div className="relative flex flex-col items-center text-center">
+        {/* Plaque settles into the scene: slightly back and low → final. */}
+        <div
+          className={`transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)] ${duration} ${
+            exiting
+              ? "scale-[0.96] opacity-100"
+              : showPlaque
+                ? "translate-y-0 scale-100 opacity-100"
+                : "translate-y-3 scale-[0.94] opacity-0"
+          }`}
+        >
+          <JazzclubPlaque interactive={phase === "idle" && !exiting} />
+        </div>
+
+        <div
+          className={`flex flex-col items-center transition-[opacity,transform] ease-out ${
+            fastSettle ? "duration-200" : "delay-200 duration-700"
+          } ${
+            showPlaque
+              ? "translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-3 opacity-0"
+          }`}
+        >
+          <p className="mt-8 max-w-[34ch] text-balance text-base leading-relaxed text-white/85 sm:text-lg">
+            Curated AI GTM rooms for founders, operators and partners.
+          </p>
+
+          <div className="pointer-events-auto mt-8 flex flex-col-reverse items-center gap-3 sm:flex-row sm:gap-4">
+            {/* Secondary — left. Unchanged V2 co-host flow. */}
+            <Link
+              href={CO_HOST_URL}
+              className="inline-flex items-center gap-2 rounded-full border border-white/35 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-white/70 hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Co-host with JazzHQ
+              <span aria-hidden="true">→</span>
+            </Link>
+
+            {/* Primary — right. */}
+            <Link
+              href={EXPLORE_URL}
+              onClick={onExplore}
+              aria-disabled={exitStage > 0}
+              className={`inline-flex items-center gap-2 rounded-full bg-[#e8574c] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(232,87,76,0.35)] transition duration-100 hover:bg-[#d54a40] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+                exitStage > 0 ? "scale-[0.97]" : "scale-100"
+              }`}
+            >
+              Explore Events
+              <span
+                aria-hidden="true"
+                className={`transition-transform duration-100 ${
+                  exitStage > 0 ? "translate-x-1" : "translate-x-0"
+                }`}
+              >
+                →
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Utility control, only while the intro is running. */}
+      {(phase === "intro" || phase === "settling") && (
+        <button
+          type="button"
+          onClick={onSkip}
+          className="group pointer-events-auto absolute bottom-6 right-6 inline-flex items-center gap-1.5 text-xs font-medium tracking-wide text-white/50 transition-colors hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:bottom-8 sm:right-10 sm:text-[13px]"
+        >
+          Skip intro
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-150 group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
