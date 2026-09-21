@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { CO_HOST_URL } from "../data/events";
 import { JazzclubPlaque } from "./JazzclubPlaque";
 
 export type HeroPhase = "loading" | "intro" | "settling" | "idle";
@@ -20,6 +19,20 @@ type Props = {
 
 /** Where "Explore Events" goes — a dedicated page, never an in-page scroll. */
 export const EXPLORE_URL = "/events/explore";
+
+/** "Co-host with JazzHQ" scrolls to the Who Sponsors section on this page. */
+export const WHO_SPONSORS_ID = "who-sponsors";
+
+function scrollToWhoSponsors(event: React.MouseEvent<HTMLAnchorElement>) {
+  const target = document.getElementById(WHO_SPONSORS_ID);
+  if (!target) return; // no section on this page — follow the href instead
+  event.preventDefault();
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({
+    behavior: reduced ? "auto" : "smooth",
+    block: "start",
+  });
+}
 
 /**
  * DOM layer above the WebGL canvas. The plaque and CTAs live here rather
@@ -78,9 +91,10 @@ export function HeroOverlay({
           </p>
 
           <div className="pointer-events-auto mt-8 flex flex-col-reverse items-center gap-3 sm:flex-row sm:gap-4">
-            {/* Secondary — left. Unchanged V2 co-host flow. */}
+            {/* Secondary — left. Scrolls down to Who Sponsors. */}
             <Link
-              href={CO_HOST_URL}
+              href={`#${WHO_SPONSORS_ID}`}
+              onClick={scrollToWhoSponsors}
               className="inline-flex items-center gap-2 rounded-full border border-white/35 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-white/70 hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Co-host with JazzHQ

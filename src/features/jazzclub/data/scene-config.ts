@@ -115,13 +115,13 @@ function ring(slugs: string[], prefix: string, travel: number) {
 }
 
 const DESKTOP_SLUGS = [
-  "room-01", "room-02", "room-03", "room-04", "room-05", "room-06",
-  "room-07", "room-08", "room-09", "room-10", "room-11", "room-12",
+  "room-01", "room-02", "room-03", "room-04", "room-05", "room-06", "room-07",
+  "room-08", "room-09", "room-10", "room-11", "room-12", "room-13",
 ];
 
 const MOBILE_SLUGS = [
-  "room-01", "room-02", "room-03", "room-04",
-  "room-05", "room-06", "room-07", "room-08",
+  "room-01", "room-02", "room-03", "room-04", "room-05",
+  "room-06", "room-07", "room-08", "room-09",
 ];
 
 const DESKTOP_CARD_HEIGHT = 3.3;
@@ -134,7 +134,7 @@ export const DESKTOP_SCENE: SceneConfig = {
     height: DESKTOP_CARD_HEIGHT,
     cornerRadius: 0.12,
   },
-  ringRadius: 6.4,
+  ringRadius: 6.9,
   camera: { fov: 50, startZ: 4.2, endZ: 2.2 },
   timing: {
     cardDuration: 2.1,
@@ -143,7 +143,7 @@ export const DESKTOP_SCENE: SceneConfig = {
     settleEnd: 2.45,
     skipDuration: 0.22,
   },
-  idleSpin: 0.012,
+  idleSpin: 0.034,
 };
 
 export const MOBILE_SCENE: SceneConfig = {
@@ -153,7 +153,7 @@ export const MOBILE_SCENE: SceneConfig = {
     height: MOBILE_CARD_HEIGHT,
     cornerRadius: 0.1,
   },
-  ringRadius: 4.9,
+  ringRadius: 5.2,
   camera: { fov: 58, startZ: 3.6, endZ: 2.5 },
   timing: {
     cardDuration: 1.95,
@@ -162,7 +162,7 @@ export const MOBILE_SCENE: SceneConfig = {
     settleEnd: 2.25,
     skipDuration: 0.2,
   },
-  idleSpin: 0.009,
+  idleSpin: 0.026,
 };
 
 /** Path to the optimized archive photo for a given breakpoint. */

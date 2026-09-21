@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, MapPin } from "lucide-react";
+import { CalendarDays, ChevronDown, MapPin } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import {
   eventCities,
@@ -10,6 +10,7 @@ import {
   startOfToday,
   type JazzclubEvent,
 } from "../data/events";
+import { CalendarModal } from "./CalendarModal";
 import { EventDeck } from "./EventDeck";
 
 export type StatusFilter = "all" | "upcoming" | "featured" | "past";
@@ -44,6 +45,15 @@ function filterEvents(
     return true;
   });
 
+  if (status === "featured") {
+    // Editorial order first, then date for anything unordered.
+    return [...matches].sort(
+      (a, b) =>
+        (a.featuredOrder ?? Number.MAX_SAFE_INTEGER) -
+          (b.featuredOrder ?? Number.MAX_SAFE_INTEGER) ||
+        eventTime(a) - eventTime(b),
+    );
+  }
   const sorted = [...matches].sort((a, b) => eventTime(a) - eventTime(b));
   return status === "past" ? sorted.reverse() : sorted;
 }
@@ -63,6 +73,7 @@ export function EventExplorer() {
   const [today] = useState(startOfToday);
   const [status, setStatus] = useState<StatusFilter>("all");
   const [city, setCity] = useState<string>(ALL_CITIES);
+  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const cities = useMemo(() => eventCities(jazzclubEvents), []);
   const deck = useMemo(
@@ -102,19 +113,25 @@ export function EventExplorer() {
     applyFilters("all", ALL_CITIES);
   }
 
+  /**
+   * A city picked in the calendar filters the deck behind the modal. Only
+   * cities that actually have published events are offered.
+   */
+  function handleCalendarCity(nextCity: string) {
+    if (!cities.includes(nextCity)) return;
+    applyFilters("all", nextCity);
+  }
+
   return (
     <section
-      aria-label="Pick your event"
+      aria-label="Jazzclub events"
       className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col overflow-hidden bg-[#08080a] pb-8 pt-6 sm:pt-8"
     >
       <div className="page-section">
         <div className="jc-enter-rise mx-auto max-w-[var(--max-content)] text-center">
-          <h1 className="text-[34px] font-semibold tracking-tight text-white sm:text-6xl">
-            Pick your event.
-          </h1>
-          <p className="mt-3 text-base text-white/60 sm:text-lg">
+          <h1 className="mx-auto max-w-[18ch] text-[34px] font-semibold leading-[1.08] tracking-tight text-white sm:text-6xl">
             Find the next Jazzclub room near you.
-          </p>
+          </h1>
         </div>
 
         <div
@@ -177,6 +194,16 @@ export function EventExplorer() {
               className="pointer-events-none absolute right-4 h-4 w-4 text-white"
             />
           </label>
+
+          <button
+            type="button"
+            onClick={() => setCalendarOpen(true)}
+            aria-haspopup="dialog"
+            className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:border-white/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:px-6 sm:py-3 sm:text-[15px]"
+          >
+            <CalendarDays aria-hidden="true" className="h-4 w-4" />
+            JazzClub Calendar 2027
+          </button>
         </div>
       </div>
 
@@ -200,6 +227,13 @@ export function EventExplorer() {
           </button>
         </div>
       )}
+
+      <CalendarModal
+        open={calendarOpen}
+        onClose={() => setCalendarOpen(false)}
+        linkedCities={new Set(cities)}
+        onCityClick={handleCalendarCity}
+      />
     </section>
   );
 }

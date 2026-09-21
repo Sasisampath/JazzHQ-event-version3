@@ -13,7 +13,7 @@
 export type EventStatus = "upcoming" | "past";
 
 /**
- * - `open`        → registration is live      → "Get Tickets →"
+ * - `open`        → registration is live      → "Register now →"
  * - `application` → attendance by application → "Apply Now →"
  * - `unopened`    → upcoming, not yet open    → "Coming Soon"
  * - `closed`      → past event                → "View Recap →" / "Past Event"
@@ -43,6 +43,8 @@ export type JazzclubEvent = {
   status?: EventStatus;
   /** Editorial — JazzHQ decides. Never computed from date. */
   featured: boolean;
+  /** Manual ordering within the Featured filter. Lower shows first. */
+  featuredOrder?: number;
   registrationState: RegistrationState;
   /** Optional override. When omitted, derived from registrationState/url. */
   ctaType?: EventCtaType;
@@ -62,7 +64,7 @@ const REAL_EVENTS: JazzclubEvent[] = [
   {
     id: "bengaluru-unwind",
     city: "Bengaluru",
-    title: "Unwind Bengaluru",
+    title: "JazzClub Bengaluru",
     date: "2026-08-27",
     description:
       "The Bengaluru room, bringing operators and partners together over AI GTM.",
@@ -75,7 +77,7 @@ const REAL_EVENTS: JazzclubEvent[] = [
   {
     id: "chennai-unwind",
     city: "Chennai",
-    title: "Unwind Chennai",
+    title: "JazzClub Chennai",
     date: "2026-09-17",
     description:
       "An evening of curated AI GTM conversations with the Chennai ecosystem.",
@@ -93,6 +95,7 @@ const REAL_EVENTS: JazzclubEvent[] = [
     description: "An evening for PS leaders to learn and network.",
     thumbnail: "/assets/jazzclub/events/mumbai.webp",
     featured: true,
+    featuredOrder: 1,
     registrationState: "open",
     url: "https://luma.com/laa0heaf",
     accent: "#1f9d61",
@@ -100,7 +103,7 @@ const REAL_EVENTS: JazzclubEvent[] = [
   {
     id: "hyderabad-unwind",
     city: "Hyderabad",
-    title: "Unwind Hyderabad",
+    title: "JazzClub Hyderabad",
     date: "2026-10-29",
     description:
       "The Hyderabad room for founders, operators and partners building AI-native GTM.",
@@ -152,6 +155,7 @@ const DEMO_EVENTS: JazzclubEvent[] = [
     description: "Demo record — real conversations with real operators.",
     thumbnail: null,
     featured: true,
+    featuredOrder: 2,
     registrationState: "unopened",
     url: null,
     accent: "#2f4fd8",
@@ -234,7 +238,7 @@ export function eventCta(event: JazzclubEvent): EventCtaType {
 }
 
 export const CTA_LABEL: Record<EventCtaType, string> = {
-  tickets: "Get Tickets",
+  tickets: "Register now",
   apply: "Apply Now",
   "coming-soon": "Coming Soon",
   recap: "View Recap",

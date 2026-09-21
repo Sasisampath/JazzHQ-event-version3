@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
       },
+      {
+        // YouTube stills for the JazzClub video testimonials.
+        protocol: "https",
+        hostname: "i.ytimg.com",
+      },
     ],
   },
   async rewrites() {
