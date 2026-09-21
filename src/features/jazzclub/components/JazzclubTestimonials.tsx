@@ -13,26 +13,21 @@ export function JazzclubTestimonials() {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="bg-[#f6f3ec] py-20 sm:py-28"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(19,19,21,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(19,19,21,0.05) 1px, transparent 1px)",
-        backgroundSize: "72px 72px",
-      }}
+      className="jc-section jc-section--light"
     >
       <div className="page-section">
         <div className="mx-auto max-w-[var(--max-content)]">
           <h2
             id="testimonials-heading"
-            className="max-w-[16ch] text-4xl font-semibold leading-[1.06] tracking-tight text-[#131315] sm:text-5xl"
+            className="jc-title max-w-[18ch]"
           >
             {TESTIMONIALS_HEADING}
           </h2>
 
-          <ul className="mt-14 grid gap-6 lg:grid-cols-3">
+          <ul className="mt-10 grid gap-6 lg:grid-cols-3">
             {JAZZCLUB_TESTIMONIALS.map((person) => (
               <li key={person.id}>
-                <figure className="flex h-full flex-col overflow-hidden rounded-[28px] bg-white ring-1 ring-[#131315]/8">
+                <figure className="flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--stroke)] bg-white">
                   {/* The supplied portraits are opaque, so they run
                       full-bleed; the accent stays as a thin band above. */}
                   <div
@@ -52,15 +47,13 @@ export function JazzclubTestimonials() {
                   </div>
 
                   <figcaption className="flex flex-1 flex-col p-7">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#e8574c]">
-                      {person.name}
-                    </p>
-                    <p className="mt-2 text-sm font-medium text-[#6b6b73]">
+                    <p className="jc-eyebrow">{person.name}</p>
+                    <p className="jc-body mt-2 text-sm">
                       {person.role}, {person.company}
                     </p>
 
                     {person.quote && (
-                      <blockquote className="mt-5 border-t border-[#131315]/10 pt-5 text-base leading-relaxed text-[#131315]">
+                      <blockquote className="mt-5 border-t border-[var(--stroke)] pt-5 text-[15px] leading-[1.6] text-[#131315]">
                         “{person.quote}”
                       </blockquote>
                     )}
@@ -83,9 +76,9 @@ export function JazzclubTestimonials() {
             ))}
           </ul>
 
-          <div className="mt-16 border-t border-[#131315]/12 pt-10">
-            <p className="text-[11px] font-semibold tracking-[0.28em] text-[#6b6b73]">
-              PARTNERS IN THE ROOM
+          <div className="mt-14 border-t border-[var(--stroke)] pt-10">
+            <p className="text-[12px] font-semibold uppercase tracking-[0.22em] text-[#9a9aa2]">
+              Partners in the room
             </p>
             <ul className="mt-7 flex flex-wrap items-center gap-x-12 gap-y-7">
               {PARTNER_LOGOS.map((logo) => (

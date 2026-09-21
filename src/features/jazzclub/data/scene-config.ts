@@ -114,9 +114,10 @@ function ring(slugs: string[], prefix: string, travel: number) {
   });
 }
 
+// room-12 (DSC02556) is deliberately excluded from the archive ring.
 const DESKTOP_SLUGS = [
-  "room-01", "room-02", "room-03", "room-04", "room-05", "room-06", "room-07",
-  "room-08", "room-09", "room-10", "room-11", "room-12", "room-13",
+  "room-01", "room-02", "room-03", "room-04", "room-05", "room-06",
+  "room-07", "room-08", "room-09", "room-10", "room-11", "room-13",
 ];
 
 const MOBILE_SLUGS = [

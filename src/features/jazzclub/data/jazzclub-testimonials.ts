@@ -51,8 +51,8 @@ export const JAZZCLUB_TESTIMONIALS: JazzclubTestimonial[] = [
     role: "Co-founder & CEO",
     company: "WATI",
     portrait: "/assets/jazzclub/testimonials/ken-yeung.png",
-    // No quote supplied yet — the card renders without one.
-    quote: null,
+    quote:
+      "A huge shoutout to JazzHQ, the \u2018Octopus\u2019 of the day, for connecting people and sparking real opportunities.",
     logo: "/assets/logos/wati.svg",
     panel: "#ffe4e0",
   },

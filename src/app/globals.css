@@ -2383,3 +2383,167 @@ body {
     animation: jc-enter-fade 120ms ease-out both;
   }
 }
+
+/* ── JazzClub Event Home ─────────────────────────────────────
+   Same surface and type scale as the rest of the JazzHQ site:
+   the page background, --grid-line grid and the home-page heading
+   values, so /events reads as part of the site. */
+
+.jc-section {
+  padding-block: 72px;
+}
+
+@media (min-width: 640px) {
+  .jc-section {
+    padding-block: 96px;
+  }
+}
+
+.jc-section--light {
+  background-color: var(--background);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.jc-section--dark {
+  background-color: #08080a;
+}
+
+.jc-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--vendor-tab);
+}
+
+.jc-section--dark .jc-eyebrow {
+  color: #e8574c;
+}
+
+.jc-title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #131315;
+}
+
+.jc-section--dark .jc-title {
+  color: #ffffff;
+}
+
+.jc-sub {
+  font-size: clamp(14px, 1.4vw, 16px);
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+.jc-section--dark .jc-sub {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.jc-body {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+.jc-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #131315;
+}
+
+/* ── Calendar 2027 ──────────────────────────────────────────── */
+
+.jc-quarter {
+  background-color: #ffffff;
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.jc-section--dark .jc-quarter,
+.jc-quarter--dark {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.jc-quarter__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--stroke);
+  background-color: #fbfaf7;
+}
+
+.jc-quarter--dark .jc-quarter__head {
+  border-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.jc-month {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--stroke);
+}
+
+.jc-month:last-child {
+  border-bottom: 0;
+}
+
+.jc-quarter--dark .jc-month {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 400px) {
+  .jc-month {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.jc-city {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #131315;
+}
+
+.jc-quarter--dark .jc-city {
+  color: #ffffff;
+}
+
+.jc-city-link:hover .jc-city,
+.jc-city-link:focus-visible .jc-city {
+  color: #e8574c;
+}
+
+.jc-tba {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px dashed var(--stroke);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #9a9aa2;
+  background-color: #fbfaf7;
+}
+
+.jc-quarter--dark .jc-tba {
+  border-color: rgba(255, 255, 255, 0.18);
+  background-color: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.45);
+}

@@ -20,19 +20,19 @@ export function VideoTestimonials() {
   return (
     <section
       aria-labelledby="video-testimonials-heading"
-      className="bg-[#08080a] py-20 sm:py-28"
+      className="jc-section jc-section--dark"
     >
       <div className="page-section">
         <div className="mx-auto max-w-[var(--max-content)]">
           <h2
             id="video-testimonials-heading"
-            className="max-w-[16ch] text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl"
+            className="jc-title max-w-[18ch]"
           >
             What people say about JazzClub
           </h2>
 
           {/* One row on desktop; a swipeable rail on small screens. */}
-          <ul className="mt-12 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3">
+          <ul className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3">
             {VIDEO_TESTIMONIALS.map((video, index) => (
               <li
                 key={video.id}
@@ -111,9 +111,11 @@ function VideoCard({
 
       {video.title && (
         <figcaption className="mt-4">
-          <p className="text-base font-semibold text-white">{video.title}</p>
+          <p className="text-[17px] font-semibold tracking-[-0.01em] text-white">
+            {video.title}
+          </p>
           {video.description && (
-            <p className="mt-1.5 text-sm leading-relaxed text-white/60">
+            <p className="jc-sub mt-1.5">
               {video.description}
             </p>
           )}

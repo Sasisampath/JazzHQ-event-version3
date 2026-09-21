@@ -14,16 +14,14 @@ export function SponsorshipOptions() {
   return (
     <section
       aria-labelledby="sponsorship-heading"
-      className="bg-[#08080a] py-20 sm:py-28"
+      className="jc-section jc-section--dark"
     >
       <div className="page-section">
         <div className="mx-auto max-w-[var(--max-content)]">
-          <p className="text-[11px] font-semibold tracking-[0.28em] text-[#e8574c]">
-            SPONSORSHIP OPTIONS
-          </p>
+          <p className="jc-eyebrow">Sponsorship options</p>
           <h2
             id="sponsorship-heading"
-            className="mt-6 max-w-[18ch] text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-5xl"
+            className="jc-title mt-5 max-w-[20ch]"
           >
             {SPONSORSHIP_HEADING}
           </h2>
@@ -35,11 +33,11 @@ export function SponsorshipOptions() {
                 className="flex flex-col rounded-[28px] p-8 sm:p-10"
                 style={{ backgroundColor: option.surface, color: option.ink }}
               >
-                <h3 className="text-2xl font-semibold tracking-tight sm:text-[28px]">
+                <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.02em] sm:text-2xl">
                   {option.name}
                 </h3>
                 <p
-                  className="mt-2 text-sm font-medium"
+                  className="mt-2 text-[13px] font-semibold uppercase tracking-[0.12em]"
                   style={{ color: option.muted }}
                 >
                   {option.branding}
@@ -49,7 +47,7 @@ export function SponsorshipOptions() {
                   {option.points.map((point) => (
                     <li
                       key={point}
-                      className="border-t pt-4 text-sm leading-relaxed first:border-t-0 first:pt-0 sm:text-[15px]"
+                      className="border-t pt-4 text-[15px] leading-[1.6] first:border-t-0 first:pt-0"
                       style={{ borderColor: option.rule }}
                     >
                       {point}
