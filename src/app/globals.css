@@ -2462,13 +2462,13 @@ body {
 /* ── Calendar 2027 ──────────────────────────────────────────── */
 
 .jc-quarter {
+  --jc-accent: #e8574c;
   background-color: #ffffff;
   border: 1px solid var(--stroke);
   border-radius: 16px;
   overflow: hidden;
 }
 
-.jc-section--dark .jc-quarter,
 .jc-quarter--dark {
   background-color: rgba(255, 255, 255, 0.03);
   border-color: rgba(255, 255, 255, 0.12);
@@ -2476,23 +2476,62 @@ body {
 
 .jc-quarter__head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 16px 20px;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--stroke);
-  background-color: #fbfaf7;
+  background-color: color-mix(in srgb, var(--jc-accent) 9%, #ffffff);
 }
 
 .jc-quarter--dark .jc-quarter__head {
   border-color: rgba(255, 255, 255, 0.12);
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: color-mix(in srgb, var(--jc-accent) 22%, transparent);
+}
+
+.jc-quarter__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--jc-accent);
+}
+
+.jc-quarter__label::before {
+  content: "";
+  width: 6px;
+  height: 18px;
+  border-radius: 3px;
+  background-color: var(--jc-accent);
+}
+
+.jc-quarter--dark .jc-quarter__label {
+  color: color-mix(in srgb, var(--jc-accent) 55%, #ffffff);
+}
+
+.jc-quarter--dark .jc-quarter__label::before {
+  background-color: color-mix(in srgb, var(--jc-accent) 65%, #ffffff);
+}
+
+.jc-quarter__year {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #9a9aa2;
+}
+
+.jc-quarter--dark .jc-quarter__year {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .jc-month {
   display: grid;
-  grid-template-columns: 96px 1fr;
+  grid-template-columns: 92px 1fr;
   gap: 16px;
+  align-items: start;
   padding: 16px 20px;
   border-bottom: 1px solid var(--stroke);
 }
@@ -2505,6 +2544,19 @@ body {
   border-color: rgba(255, 255, 255, 0.1);
 }
 
+.jc-month__name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.9;
+  color: #9a9aa2;
+}
+
+.jc-quarter--dark .jc-month__name {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 @media (max-width: 400px) {
   .jc-month {
     grid-template-columns: 1fr;
@@ -2512,38 +2564,149 @@ body {
   }
 }
 
-.jc-city {
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #131315;
-}
-
-.jc-quarter--dark .jc-city {
-  color: #ffffff;
-}
-
-.jc-city-link:hover .jc-city,
-.jc-city-link:focus-visible .jc-city {
-  color: #e8574c;
-}
-
-.jc-tba {
+.jc-city-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px dashed var(--stroke);
   border-radius: 999px;
-  padding: 5px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #9a9aa2;
-  background-color: #fbfaf7;
+  padding: 5px 12px 5px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #131315;
+  background-color: color-mix(in srgb, var(--jc-accent) 10%, #ffffff);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.jc-quarter--dark .jc-tba {
-  border-color: rgba(255, 255, 255, 0.18);
-  background-color: rgba(255, 255, 255, 0.03);
-  color: rgba(255, 255, 255, 0.45);
+.jc-quarter--dark .jc-city-chip {
+  color: #ffffff;
+  background-color: color-mix(in srgb, var(--jc-accent) 24%, transparent);
+}
+
+.jc-city-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background-color: var(--jc-accent);
+}
+
+.jc-quarter--dark .jc-city-dot {
+  background-color: color-mix(in srgb, var(--jc-accent) 55%, #ffffff);
+}
+
+.jc-city-chip--link {
+  cursor: pointer;
+}
+
+.jc-city-chip--link:hover,
+.jc-city-chip--link:focus-visible {
+  background-color: color-mix(in srgb, var(--jc-accent) 20%, #ffffff);
+  outline: none;
+}
+
+.jc-quarter--dark .jc-city-chip--link:hover,
+.jc-quarter--dark .jc-city-chip--link:focus-visible {
+  background-color: color-mix(in srgb, var(--jc-accent) 38%, transparent);
+}
+
+.jc-city-arrow {
+  font-size: 13px;
+  color: var(--jc-accent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.jc-quarter--dark .jc-city-arrow {
+  color: color-mix(in srgb, var(--jc-accent) 55%, #ffffff);
+}
+
+.jc-city-chip--link:hover .jc-city-arrow,
+.jc-city-chip--link:focus-visible .jc-city-arrow {
+  opacity: 1;
+}
+
+.jc-break {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #9a9aa2;
+}
+
+.jc-quarter--dark .jc-break {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+/* ── Testimonial quote cards ────────────────────────────────── */
+
+.jc-quote-card {
+  --jc-accent: #e8574c;
+  position: relative;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.jc-quote-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+  background-color: var(--jc-accent);
+}
+
+.jc-quote-mark {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--jc-accent);
+}
+
+.jc-avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: var(--jc-accent);
+  box-shadow: 0 0 0 1px var(--stroke);
+}
+
+/* ── Sponsorship option cards ───────────────────────────────── */
+
+.jc-option-card {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .jc-option-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 18px 48px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+}
+
+.jc-option-card:focus-within {
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jc-option-card,
+  .jc-option-card:hover {
+    transform: none;
+  }
 }

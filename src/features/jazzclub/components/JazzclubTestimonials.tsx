@@ -6,8 +6,9 @@ import {
 } from "../data/jazzclub-testimonials";
 
 /**
- * Supplied cut-out portraits, coral name label, role and quote, over the
- * JazzHQ grid. Real partner marks sit underneath — nothing invented.
+ * Quote-led editorial cards. The supplied portraits are small (≈250px), so
+ * they render as a sharp 88px avatar rather than a stretched banner — the
+ * quote carries the card and nothing is upscaled.
  */
 export function JazzclubTestimonials() {
   return (
@@ -17,58 +18,58 @@ export function JazzclubTestimonials() {
     >
       <div className="page-section">
         <div className="mx-auto max-w-[var(--max-content)]">
-          <h2
-            id="testimonials-heading"
-            className="jc-title max-w-[18ch]"
-          >
+          <p className="jc-eyebrow">Testimonials</p>
+          <h2 id="testimonials-heading" className="jc-title mt-5 max-w-[18ch]">
             {TESTIMONIALS_HEADING}
           </h2>
 
           <ul className="mt-10 grid gap-6 lg:grid-cols-3">
             {JAZZCLUB_TESTIMONIALS.map((person) => (
               <li key={person.id}>
-                <figure className="flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--stroke)] bg-white">
-                  {/* The supplied portraits are opaque, so they run
-                      full-bleed; the accent stays as a thin band above. */}
-                  <div
-                    aria-hidden="true"
-                    className="h-1.5 w-full"
-                    style={{ backgroundColor: person.panel }}
-                  />
-                  <div className="relative h-[280px] w-full overflow-hidden bg-white sm:h-[320px]">
-                    <Image
-                      src={person.portrait}
-                      alt={`${person.name}, ${person.role} at ${person.company}`}
-                      fill
-                      loading="lazy"
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="object-cover object-top"
-                    />
-                  </div>
+                <figure
+                  className="jc-quote-card flex h-full flex-col rounded-2xl border border-[var(--stroke)] bg-white p-7 sm:p-8"
+                  style={{ ["--jc-accent" as string]: person.panel }}
+                >
+                  <span aria-hidden="true" className="jc-quote-mark">
+                    “
+                  </span>
 
-                  <figcaption className="flex flex-1 flex-col p-7">
-                    <p className="jc-eyebrow">{person.name}</p>
-                    <p className="jc-body mt-2 text-sm">
-                      {person.role}, {person.company}
-                    </p>
+                  {person.quote && (
+                    <blockquote className="text-[17px] leading-[1.55] tracking-[-0.01em] text-[#131315] sm:text-[19px]">
+                      {person.quote}
+                    </blockquote>
+                  )}
 
-                    {person.quote && (
-                      <blockquote className="mt-5 border-t border-[var(--stroke)] pt-5 text-[15px] leading-[1.6] text-[#131315]">
-                        “{person.quote}”
-                      </blockquote>
-                    )}
+                  <figcaption className="mt-auto flex items-center gap-4 border-t border-[var(--stroke)] pt-6">
+                    <span className="jc-avatar">
+                      <Image
+                        src={person.portrait}
+                        alt={`${person.name}, ${person.role} at ${person.company}`}
+                        width={176}
+                        height={176}
+                        quality={95}
+                        loading="lazy"
+                        sizes="88px"
+                        className="h-full w-full object-cover object-top"
+                      />
+                    </span>
+
+                    <span className="min-w-0">
+                      <span className="jc-eyebrow block">{person.name}</span>
+                      <span className="jc-body mt-1.5 block text-sm">
+                        {person.role}, {person.company}
+                      </span>
+                    </span>
 
                     {person.logo && (
-                      <div className="mt-auto pt-7">
-                        <Image
-                          src={person.logo}
-                          alt={person.company}
-                          width={104}
-                          height={26}
-                          loading="lazy"
-                          className="h-6 w-auto opacity-70"
-                        />
-                      </div>
+                      <Image
+                        src={person.logo}
+                        alt={person.company}
+                        width={104}
+                        height={26}
+                        loading="lazy"
+                        className="ml-auto h-5 w-auto shrink-0 opacity-60"
+                      />
                     )}
                   </figcaption>
                 </figure>

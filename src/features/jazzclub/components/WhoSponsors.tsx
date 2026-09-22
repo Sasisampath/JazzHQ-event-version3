@@ -17,7 +17,7 @@ export function WhoSponsors() {
       className="jc-section jc-section--light scroll-mt-24"
     >
       <div className="page-section">
-        <div className="mx-auto grid max-w-[var(--max-content)] gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
+        <div className="mx-auto grid max-w-[var(--max-content)] gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-24">
           <div>
             <p className="jc-eyebrow">Who sponsors</p>
             <h2
@@ -31,17 +31,15 @@ export function WhoSponsors() {
             </p>
           </div>
 
-          <dl className="border-t border-[var(--stroke)]">
+          <dl className="lg:pt-2">
             {SPONSOR_MATCHES.map((match) => (
               <div
                 key={match.index}
-                className="grid gap-3 border-b border-[var(--stroke)] py-7 sm:grid-cols-[132px_1fr] sm:gap-8 sm:py-9"
+                className="grid gap-2.5 border-t border-[var(--stroke)] py-7 first:border-t-0 first:pt-0 sm:grid-cols-[112px_1fr] sm:gap-10 sm:py-8"
               >
-                <dt className="jc-eyebrow">
-                  {match.index}
-                </dt>
+                <dt className="jc-eyebrow sm:pt-1">{match.index}</dt>
                 <dd>
-                  <p className="text-xl font-bold uppercase leading-[1.2] tracking-[-0.01em] text-[#131315] sm:text-[22px]">
+                  <p className="text-[19px] font-bold uppercase leading-[1.25] tracking-[-0.01em] text-[#131315] sm:text-[21px]">
                     {match.audience}
                   </p>
                   <p className="jc-body mt-2.5 max-w-[46ch]">

@@ -14,6 +14,8 @@ export type CalendarMonth = {
 export type CalendarQuarter = {
   id: string;
   label: string;
+  /** Quarter accent — used by both the light section and the dark modal. */
+  accent: string;
   months: CalendarMonth[];
 };
 
@@ -21,6 +23,7 @@ export const CALENDAR_2027: CalendarQuarter[] = [
   {
     id: "q1",
     label: "Q1",
+    accent: "#e8574c",
     months: [
       { month: "January", cities: ["Chennai", "Bengaluru"] },
       { month: "February", cities: ["Bengaluru", "Mumbai"] },
@@ -30,6 +33,7 @@ export const CALENDAR_2027: CalendarQuarter[] = [
   {
     id: "q2",
     label: "Q2",
+    accent: "#2f7d5c",
     months: [
       { month: "April", cities: ["Singapore", "Kuala Lumpur"] },
       { month: "May", cities: ["Bengaluru", "London"] },
@@ -39,6 +43,7 @@ export const CALENDAR_2027: CalendarQuarter[] = [
   {
     id: "q3",
     label: "Q3",
+    accent: "#4f46e5",
     months: [
       { month: "July", cities: ["Chennai", "Singapore"] },
       { month: "August", cities: [] },
@@ -48,6 +53,7 @@ export const CALENDAR_2027: CalendarQuarter[] = [
   {
     id: "q4",
     label: "Q4",
+    accent: "#c2801c",
     months: [
       { month: "October", cities: ["Dubai", "London"] },
       { month: "November", cities: ["Amsterdam", "New York"] },
@@ -63,5 +69,5 @@ export const CALENDAR_INTRO =
 
 export const CALENDAR_NOTE = "Exact dates to be announced soon.";
 
-/** Shown when a month has no published location yet. */
-export const CALENDAR_EMPTY_LABEL = "No published location yet";
+/** Months with no room planned — deliberate, not missing information. */
+export const CALENDAR_EMPTY_LABEL = "Break month";

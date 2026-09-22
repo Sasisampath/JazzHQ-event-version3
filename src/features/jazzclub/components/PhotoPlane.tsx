@@ -67,6 +67,7 @@ export function PhotoPlane({ config, texture, geometry, scene, timeline }: Props
     const sin = Math.sin(config.angle);
     const cos = Math.cos(config.angle);
     const finalX = sin * (ringRadius + driftRadius);
+    const finalY = config.y + driftY;
     const finalZ = cos * (ringRadius + driftRadius);
     const finalRotY = wrap(config.angle + Math.PI);
 
@@ -75,14 +76,14 @@ export function PhotoPlane({ config, texture, geometry, scene, timeline }: Props
     const flies = cos * ringRadius < scene.camera.endZ - 0.5;
 
     if (!flies || k === 0) {
-      mesh.position.set(finalX, driftY, finalZ);
+      mesh.position.set(finalX, finalY, finalZ);
       mesh.rotation.set(0, finalRotY, 0);
       mesh.scale.setScalar(1);
     } else {
       // INTRO transform: floating ahead of the viewer, pulled toward the
       // centre of view, facing the camera with a slight authored tilt.
       const startX = finalX * 0.7 + intro.x;
-      const startY = intro.y;
+      const startY = config.y * 0.4 + intro.y;
       const startZ = finalZ - intro.depth;
       const faceCamera = Math.atan2(-startX, scene.camera.startZ - startZ);
       const startRotY = faceCamera + intro.rotY;
@@ -91,7 +92,7 @@ export function PhotoPlane({ config, texture, geometry, scene, timeline }: Props
       // into the ring completes as the card arrives.
       mesh.position.set(
         lerp(startX, finalX, p),
-        lerp(startY, driftY, p),
+        lerp(startY, finalY, p),
         lerp(startZ, finalZ, p),
       );
       mesh.rotation.set(

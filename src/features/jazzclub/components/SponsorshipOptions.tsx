@@ -30,7 +30,7 @@ export function SponsorshipOptions() {
             {SPONSORSHIP_OPTIONS.map((option) => (
               <li
                 key={option.id}
-                className="flex flex-col rounded-[28px] p-8 sm:p-10"
+                className="jc-option-card flex h-full flex-col rounded-[28px] p-8 sm:p-10"
                 style={{ backgroundColor: option.surface, color: option.ink }}
               >
                 <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.02em] sm:text-2xl">

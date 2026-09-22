@@ -31,8 +31,9 @@ export function VideoTestimonials() {
             What people say about JazzClub
           </h2>
 
-          {/* One row on desktop; a swipeable rail on small screens. */}
-          <ul className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-3">
+          {/* Swipeable rail on small screens; an auto-fitting grid above it,
+              so adding more links to VIDEO_TESTIMONIALS just reflows. */}
+          <ul className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] sm:overflow-visible sm:pb-0">
             {VIDEO_TESTIMONIALS.map((video, index) => (
               <li
                 key={video.id}
