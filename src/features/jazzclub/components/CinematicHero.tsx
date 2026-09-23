@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -12,7 +11,7 @@ import {
 } from "react";
 import { createTimeline } from "../data/intro-timeline";
 import { DESKTOP_SCENE, MOBILE_SCENE, photoSrc } from "../data/scene-config";
-import { EXPLORE_URL, HeroOverlay, type HeroPhase } from "./HeroOverlay";
+import { HeroOverlay, type HeroPhase } from "./HeroOverlay";
 
 // three.js only ever loads on the client, and only once we know the device
 // can actually run the scene.
@@ -60,10 +59,6 @@ function supportsWebgl() {
   return webglSupport;
 }
 
-/** Explore hand-off: button press → hero pulls away → route change. */
-const PRESS_MS = 90;
-const EXIT_NAVIGATE_MS = 260;
-
 /** Archive photographs used by the no-WebGL fallback. Not tied to any city. */
 const FALLBACK_PHOTOS = ["room-01", "room-04", "room-05", "room-06"];
 
@@ -77,20 +72,15 @@ export function CinematicHero() {
     getReduced,
     getFalse,
   );
-  const router = useRouter();
-
   // INTRO → SETTLING → IDLE. "loading" = textures not decoded yet.
   const [phase, setPhase] = useState<HeroPhase>("loading");
   const [plaqueIn, setPlaqueIn] = useState(false);
   /** True when the plaque should settle quickly (skip / returning visit). */
   const [fastSettle, setFastSettle] = useState(false);
-  /** 0 idle, 1 CTA pressed, 2 hero exiting. */
-  const [exitStage, setExitStage] = useState<0 | 1 | 2>(0);
   const [active, setActive] = useState(true);
 
   const timeline = useRef(createTimeline());
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
-  const exiting = useRef(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   const mode = !mounted
@@ -160,33 +150,6 @@ export function CinematicHero() {
     later(() => setPhase("idle"), scene.timing.skipDuration * 1000);
   }, [phase, clearTimers, later, scene.timing.skipDuration]);
 
-  const handleExplore = useCallback(
-    (event: React.MouseEvent<HTMLAnchorElement>) => {
-      // Let new-tab / modified clicks behave like a normal link.
-      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      if (exiting.current) return; // one navigation only
-      exiting.current = true;
-
-      if (reducedMotion) {
-        router.push(EXPLORE_URL);
-        return;
-      }
-      setExitStage(1);
-      later(() => {
-        timeline.current.exitAt = performance.now();
-        setExitStage(2);
-      }, PRESS_MS);
-      later(() => router.push(EXPLORE_URL), PRESS_MS + EXIT_NAVIGATE_MS);
-    },
-    [reducedMotion, router, later],
-  );
-
-  const exitClass =
-    exitStage === 2
-      ? "scale-[0.985] opacity-0"
-      : "scale-100 opacity-100";
-
   return (
     <section
       ref={sectionRef}
@@ -216,9 +179,7 @@ export function CinematicHero() {
       ))}
 
       {/* Scene layer. The black section behind it never changes. */}
-      <div
-        className={`absolute inset-0 transition-[opacity,transform] duration-300 ease-out ${exitClass}`}
-      >
+      <div className="absolute inset-0">
         {mode === "webgl" && (
           <HeroCanvas
             scene={scene}
@@ -253,9 +214,7 @@ export function CinematicHero() {
         phase={effectivePhase}
         showPlaque={showPlaque}
         fastSettle={fastSettle || reducedMotion}
-        exitStage={exitStage}
         onSkip={handleSkip}
-        onExplore={handleExplore}
       />
     </section>
   );

@@ -92,3 +92,36 @@ export const APPLY_TO_JOIN_PAGE: OnboardingPageConfig = {
   formSubtitle: "Add AI reseller revenue to your agency portfolio.",
   filloutId: "ah91Ye93Jrus",
 };
+
+/**
+ * JazzClub sponsor enquiry — the destination of every "Become a Sponsor"
+ * CTA on /events. Reuses the same Fillout form and card video as the
+ * partner onboarding experience.
+ */
+export const SPONSOR_EVENTS_PAGE: OnboardingPageConfig = {
+  slug: "events-sponsor",
+  cardBackground: "#FFDADB",
+  highlightColor: "#E5484D",
+  cardHeading: "Own the conversation in the room that matters.",
+  highlights: [
+    {
+      before: "Reach founders and operators ",
+      highlight: "already thinking about AI budgets.",
+    },
+    {
+      before: "Shape the agenda around ",
+      highlight: "your category and your ICP.",
+    },
+    {
+      before: "Leave with ",
+      highlight: "introductions, not just impressions.",
+    },
+    {
+      before: "Pick the markets that matter from the ",
+      highlight: "2027 JazzClub calendar.",
+    },
+  ],
+  formTitle: "Become a Sponsor",
+  formSubtitle: "Tell us about your goals and we will match you to a room.",
+  filloutId: "ah91Ye93Jrus",
+};

@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { CO_HOST_URL } from "../data/events";
+import { SponsorCta } from "./SponsorCta";
 import {
   SPONSORSHIP_HEADING,
   SPONSORSHIP_OPTIONS,
@@ -59,13 +58,7 @@ export function SponsorshipOptions() {
           </ul>
 
           <div className="mt-12 flex justify-center lg:justify-start">
-            <Link
-              href={CO_HOST_URL}
-              className="inline-flex items-center gap-2 rounded-full bg-[#e8574c] px-8 py-4 text-sm font-semibold text-white transition hover:bg-[#d54a40] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              {SPONSOR_CTA_LABEL}
-              <span aria-hidden="true">→</span>
-            </Link>
+            <SponsorCta variant="primary">{SPONSOR_CTA_LABEL}</SponsorCta>
           </div>
         </div>
       </div>

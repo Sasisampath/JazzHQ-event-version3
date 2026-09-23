@@ -69,8 +69,7 @@ function MonthCities({
 }) {
   if (entry.cities.length === 0) {
     return (
-      <p className="jc-break">
-        <span aria-hidden="true">—</span>
+      <p className="jc-break" aria-label="No room planned">
         {CALENDAR_EMPTY_LABEL}
       </p>
     );

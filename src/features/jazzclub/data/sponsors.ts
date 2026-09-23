@@ -1,34 +1,4 @@
-/** Editorial content for the Who Sponsors and Sponsorship Options sections. */
-
-export const WHO_SPONSORS_HEADING =
-  "The best sponsors are companies with something to prove in a market.";
-
-export const WHO_SPONSORS_INTRO =
-  "A JazzClub room works when a sponsor wants a sharper GTM outcome than broad awareness.";
-
-export type SponsorMatch = {
-  index: string;
-  audience: string;
-  copy: string;
-};
-
-export const SPONSOR_MATCHES: SponsorMatch[] = [
-  {
-    index: "Match 01",
-    audience: "AI product founders",
-    copy: "Build credibility, surface use cases, find design partners and partners.",
-  },
-  {
-    index: "Match 02",
-    audience: "SaaS companies",
-    copy: "Launch a category conversation with operators already thinking about budgets.",
-  },
-  {
-    index: "Match 03",
-    audience: "Service providers",
-    copy: "Position expertise around AI adoption, change management or implementation.",
-  },
-];
+/** Editorial content for the Sponsorship Options section. */
 
 export const SPONSORSHIP_HEADING = "Three simple ways to own the conversation.";
 
@@ -92,4 +62,4 @@ export const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
   },
 ];
 
-export const SPONSOR_CTA_LABEL = "Become a sponsor";
+export const SPONSOR_CTA_LABEL = "Become a Sponsor";

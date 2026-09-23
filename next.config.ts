@@ -60,6 +60,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/events/explore",
+        destination: "/events#events",
+        permanent: false,
+      },
+      {
         source: "/about",
         destination: "/about-us",
         permanent: true,

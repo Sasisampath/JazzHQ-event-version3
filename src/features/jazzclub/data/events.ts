@@ -56,9 +56,6 @@ export type JazzclubEvent = {
   demo?: boolean;
 };
 
-/** Where "Co-host with JazzHQ" points. Unchanged from V2. */
-export const CO_HOST_URL = "/for-partners";
-
 /** Real JazzHQ events. */
 const REAL_EVENTS: JazzclubEvent[] = [
   {

@@ -1,6 +1,12 @@
 "use client";
 
-import Link from "next/link";
+import {
+  ATTEND_LABEL,
+  EVENTS_ID,
+  SPONSOR_ID,
+  SPONSOR_LABEL,
+  scrollToSection,
+} from "../data/anchors";
 import { JazzclubPlaque } from "./JazzclubPlaque";
 
 export type HeroPhase = "loading" | "intro" | "settling" | "idle";
@@ -11,49 +17,19 @@ type Props = {
   showPlaque: boolean;
   /** Settle quickly — skip, returning visit or reduced motion. */
   fastSettle: boolean;
-  /** 0 idle, 1 Explore CTA pressed, 2 hero exiting. */
-  exitStage: 0 | 1 | 2;
   onSkip: () => void;
-  onExplore: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 };
-
-/** Where "Explore Events" goes — a dedicated page, never an in-page scroll. */
-export const EXPLORE_URL = "/events/explore";
-
-/** "Co-host with JazzHQ" scrolls to the Who Sponsors section on this page. */
-export const WHO_SPONSORS_ID = "who-sponsors";
-
-function scrollToWhoSponsors(event: React.MouseEvent<HTMLAnchorElement>) {
-  const target = document.getElementById(WHO_SPONSORS_ID);
-  if (!target) return; // no section on this page — follow the href instead
-  event.preventDefault();
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  target.scrollIntoView({
-    behavior: reduced ? "auto" : "smooth",
-    block: "start",
-  });
-}
 
 /**
  * DOM layer above the WebGL canvas. The plaque and CTAs live here rather
  * than in the scene so they stay crisp, selectable and keyboard accessible.
  */
-export function HeroOverlay({
-  phase,
-  showPlaque,
-  fastSettle,
-  exitStage,
-  onSkip,
-  onExplore,
-}: Props) {
-  const exiting = exitStage === 2;
+export function HeroOverlay({ phase, showPlaque, fastSettle, onSkip }: Props) {
   const duration = fastSettle ? "duration-200" : "duration-[900ms]";
 
   return (
     <div
-      className={`pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6 transition-[opacity,transform] duration-300 ease-out ${
-        exiting ? "scale-[0.985] opacity-0" : "opacity-100"
-      }`}
+      className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-6"
     >
       {/* Soft scrim behind the copy only — the ring stays visible. */}
       <div
@@ -67,14 +43,12 @@ export function HeroOverlay({
         {/* Plaque settles into the scene: slightly back and low → final. */}
         <div
           className={`transition-[opacity,transform] ease-[cubic-bezier(0.22,1,0.36,1)] ${duration} ${
-            exiting
-              ? "scale-[0.96] opacity-100"
-              : showPlaque
+            showPlaque
                 ? "translate-y-0 scale-100 opacity-100"
                 : "translate-y-3 scale-[0.94] opacity-0"
           }`}
         >
-          <JazzclubPlaque interactive={phase === "idle" && !exiting} />
+          <JazzclubPlaque interactive={phase === "idle"} />
         </div>
 
         <div
@@ -91,35 +65,25 @@ export function HeroOverlay({
           </p>
 
           <div className="pointer-events-auto mt-8 flex flex-col-reverse items-center gap-3 sm:flex-row sm:gap-4">
-            {/* Secondary — left. Scrolls down to Who Sponsors. */}
-            <Link
-              href={`#${WHO_SPONSORS_ID}`}
-              onClick={scrollToWhoSponsors}
+            {/* Secondary — left. */}
+            <a
+              href={`#${SPONSOR_ID}`}
+              onClick={(event) => scrollToSection(event, SPONSOR_ID)}
               className="inline-flex items-center gap-2 rounded-full border border-white/35 px-7 py-3.5 text-sm font-semibold text-white transition hover:border-white/70 hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Co-host with JazzHQ
+              {SPONSOR_LABEL}
               <span aria-hidden="true">→</span>
-            </Link>
+            </a>
 
             {/* Primary — right. */}
-            <Link
-              href={EXPLORE_URL}
-              onClick={onExplore}
-              aria-disabled={exitStage > 0}
-              className={`inline-flex items-center gap-2 rounded-full bg-[#e8574c] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(232,87,76,0.35)] transition duration-100 hover:bg-[#d54a40] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
-                exitStage > 0 ? "scale-[0.97]" : "scale-100"
-              }`}
+            <a
+              href={`#${EVENTS_ID}`}
+              onClick={(event) => scrollToSection(event, EVENTS_ID)}
+              className="inline-flex items-center gap-2 rounded-full bg-[#e8574c] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(232,87,76,0.35)] transition hover:bg-[#d54a40] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              Explore Events
-              <span
-                aria-hidden="true"
-                className={`transition-transform duration-100 ${
-                  exitStage > 0 ? "translate-x-1" : "translate-x-0"
-                }`}
-              >
-                →
-              </span>
-            </Link>
+              {ATTEND_LABEL}
+              <span aria-hidden="true">→</span>
+            </a>
           </div>
         </div>
       </div>

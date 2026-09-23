@@ -70,4 +70,4 @@ export const CALENDAR_INTRO =
 export const CALENDAR_NOTE = "Exact dates to be announced soon.";
 
 /** Months with no room planned — deliberate, not missing information. */
-export const CALENDAR_EMPTY_LABEL = "Break month";
+export const CALENDAR_EMPTY_LABEL = "—";
