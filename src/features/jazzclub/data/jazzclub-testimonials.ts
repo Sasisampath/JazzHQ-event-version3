@@ -16,45 +16,46 @@ export type JazzclubTestimonial = {
   quote: string | null;
   /** Company mark already in the project, or null. */
   logo: string | null;
-  /** Panel colour behind the cut-out. */
+  /** Name accent (Figma: JazzHQ purple). */
   panel: string;
 };
 
 export const TESTIMONIALS_HEADING = "Don’t take our word for it.";
 
+/** Figma order: Shashidhar, Ken, Chhavi. Portraits are the Figma cut-outs. */
 export const JAZZCLUB_TESTIMONIALS: JazzclubTestimonial[] = [
-  {
-    id: "chhavi-porwal",
-    name: "Chhavi Porwal",
-    role: "Regional Partnerships",
-    company: "monday.com",
-    portrait: "/assets/jazzclub/testimonials/chhavi-porwal.png",
-    quote:
-      "I'm really proud of the partnership we've built with JazzHQ and I look forward to working with them in the future.",
-    logo: "/assets/testimonials/logo-monday.svg",
-    panel: "#d4ffe8",
-  },
   {
     id: "shashidhar-bellur",
     name: "Shashidhar Bellur",
     role: "Partner Development",
     company: "HubSpot",
-    portrait: "/assets/jazzclub/testimonials/shashidhar-bellur.png",
+    portrait: "/assets/jazzclub/testimonials/shashidhar-bellur-cutout.webp",
     quote:
       "The evening has been fantastic, lots of lived experiences from people. Loved working with the Jazz HQ team towards curating this event and executing today wonderfully.",
     logo: "/assets/logos/hubspot.svg",
-    panel: "#ecebff",
+    panel: "#564ef0",
   },
   {
     id: "ken-yeung",
     name: "Ken Yeung",
     role: "Co-founder & CEO",
     company: "WATI",
-    portrait: "/assets/jazzclub/testimonials/ken-yeung.png",
+    portrait: "/assets/jazzclub/testimonials/ken-yeung-cutout.webp",
     quote:
       "A huge shoutout to JazzHQ, the \u2018Octopus\u2019 of the day, for connecting people and sparking real opportunities.",
     logo: "/assets/logos/wati.svg",
-    panel: "#ffe4e0",
+    panel: "#564ef0",
+  },
+  {
+    id: "chhavi-porwal",
+    name: "Chhavi Porwal",
+    role: "Regional Partnerships",
+    company: "monday.com",
+    portrait: "/assets/jazzclub/testimonials/chhavi-porwal-cutout.webp",
+    quote:
+      "I'm really proud of the partnership we've built with JazzHQ and I look forward to working with them in the future.",
+    logo: "/assets/testimonials/logo-monday.svg",
+    panel: "#564ef0",
   },
 ];
 

@@ -1,4 +1,4 @@
-/** Editorial content for the Sponsorship Options section. */
+/** Editorial content for the Sponsorship section. */
 
 export const SPONSORSHIP_HEADING = "Three simple ways to own the conversation.";
 
@@ -7,11 +7,13 @@ export type SponsorshipOption = {
   name: string;
   branding: string;
   points: string[];
-  /** Card surface + text colours. No gradients. */
-  surface: string;
-  ink: string;
-  muted: string;
-  rule: string;
+  /** Figma card surface. */
+  tone: "white" | "lilac" | "dark";
+  /** Figma bullet tick colour. */
+  tick: string;
+  /** Archive photograph for the card's image slot. */
+  image: string;
+  imageAlt: string;
 };
 
 export const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
@@ -25,10 +27,10 @@ export const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
       "Workshop / demo / discussion framed around sponsor category",
       "Priority introductions and follow-up",
     ],
-    surface: "#ffffff",
-    ink: "#131315",
-    muted: "#5b5b63",
-    rule: "rgba(19,19,21,0.10)",
+    tone: "white",
+    tick: "#14ae5d",
+    image: "/assets/jazzclub/cinematic/room-05.webp",
+    imageAlt: "Speakers leading a JazzClub room discussion",
   },
   {
     id: "exclusive",
@@ -40,10 +42,10 @@ export const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
       "Workshop / demo / discussion framed around sponsor category",
       "Priority introductions and follow-up",
     ],
-    surface: "#ffe4e0",
-    ink: "#131315",
-    muted: "#6b4f4b",
-    rule: "rgba(19,19,21,0.10)",
+    tone: "lilac",
+    tick: "#564ef0",
+    image: "/assets/jazzclub/cinematic/room-06.webp",
+    imageAlt: "An attendee speaking at a JazzClub evening",
   },
   {
     id: "co-market",
@@ -55,10 +57,10 @@ export const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
       "Joint promotion and content distribution",
       "Shared attendee engagement",
     ],
-    surface: "#e6e3ff",
-    ink: "#131315",
-    muted: "#55507a",
-    rule: "rgba(19,19,21,0.10)",
+    tone: "dark",
+    tick: "#fe4c4c",
+    image: "/assets/jazzclub/cinematic/room-03.webp",
+    imageAlt: "Partners together at a JazzClub gathering",
   },
 ];
 

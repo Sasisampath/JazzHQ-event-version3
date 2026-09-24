@@ -43,10 +43,9 @@ export const CALENDAR_2027: CalendarQuarter[] = [
   {
     id: "q3",
     label: "Q3",
-    accent: "#4f46e5",
+    accent: "#564ef0",
     months: [
       { month: "July", cities: ["Chennai", "Singapore"] },
-      { month: "August", cities: [] },
       { month: "September", cities: ["Berlin", "Amsterdam"] },
     ],
   },
@@ -57,7 +56,6 @@ export const CALENDAR_2027: CalendarQuarter[] = [
     months: [
       { month: "October", cities: ["Dubai", "London"] },
       { month: "November", cities: ["Amsterdam", "New York"] },
-      { month: "December", cities: [] },
     ],
   },
 ];

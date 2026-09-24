@@ -2337,15 +2337,15 @@ body {
 }
 
 .jc-enter-rise {
-  animation: jc-enter-rise 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: jc-enter-rise 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .jc-enter-deck {
-  animation: jc-enter-deck 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: jc-enter-deck 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .jc-enter-card {
-  animation: jc-enter-fade 360ms ease-out both;
+  animation: jc-enter-fade 220ms ease-out both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2459,48 +2459,252 @@ body {
   color: #131315;
 }
 
-/* ── Calendar 2027 ──────────────────────────────────────────── */
+/* ── Event card status ──────────────────────────────────────── */
 
-.jc-quarter {
-  --jc-accent: #e8574c;
-  background-color: #ffffff;
-  border: 1px solid var(--stroke);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.jc-quarter--dark {
-  background-color: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.jc-quarter__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--stroke);
-  background-color: color-mix(in srgb, var(--jc-accent) 9%, #ffffff);
-}
-
-.jc-quarter--dark .jc-quarter__head {
-  border-color: rgba(255, 255, 255, 0.12);
-  background-color: color-mix(in srgb, var(--jc-accent) 22%, transparent);
-}
-
-.jc-quarter__label {
+.jc-status {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--jc-accent);
+  line-height: 1.4;
 }
 
-.jc-quarter__label::before {
+.jc-status--upcoming {
+  color: #c2413a;
+  background-color: #fdeeed;
+}
+
+.jc-status--featured {
+  color: #4a42d6;
+  background-color: #edecfd;
+}
+
+.jc-status--past {
+  color: #6b6b73;
+  background-color: #ecebe6;
+}
+
+/* ── Figma canvas: everything below the Events section ─────────
+   One continuous surface (Figma V4): #F7F5F1 with #EEE9E2 lines on a
+   ~30px grid, 1400px content, 100px between sections. */
+
+.jc-canvas {
+  background-color: #f7f5f1;
+  background-image:
+    linear-gradient(#eee9e2 1px, transparent 1px),
+    linear-gradient(90deg, #eee9e2 1px, transparent 1px);
+  background-size: 30.3px 30.3px;
+  padding-block: 100px;
+}
+
+.jc-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+@media (max-width: 767px) {
+  .jc-canvas {
+    padding-block: 64px;
+  }
+
+  .jc-stack {
+    gap: 72px;
+  }
+}
+
+/* Figma "Heading 2": Inter Bold 40/46, -0.8px, #242424. */
+.jc-h2 {
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #242424;
+}
+
+/* Figma supporting copy: Inter Regular 16/24, #6A7077. */
+.jc-lead {
+  font-size: 16px;
+  line-height: 24px;
+  color: #6a7077;
+}
+
+/* Figma primary CTA: coral pill, 48px tall, 32px sides, Inter 14/20. */
+.jc-cta {
+  display: inline-flex;
+  height: 48px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding-inline: 32px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #ffffff;
+  background-color: #e8574c;
+  transition: background-color 0.2s ease;
+}
+
+.jc-cta:hover {
+  background-color: #d54a40;
+}
+
+.jc-cta:focus-visible {
+  outline: 2px solid #131315;
+  outline-offset: 2px;
+}
+
+/* ── Sponsorship (Figma cards) ──────────────────────────────── */
+
+.jc-plan {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 30px;
+  transition: transform 0.22s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .jc-plan:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jc-plan,
+  .jc-plan:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+.jc-plan--white {
+  background-color: #ffffff;
+}
+
+.jc-plan--lilac {
+  background-color: #edecff;
+}
+
+.jc-plan--dark {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  color: #ffffff;
+  background-color: #0e0e0d;
+  box-shadow:
+    0 0 1.7px rgba(0, 0, 0, 0.15),
+    0 0 0.85px rgba(0, 0, 0, 0.2);
+}
+
+.jc-plan__title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: -0.48px;
+  color: #131315;
+}
+
+.jc-plan--dark .jc-plan__title {
+  color: #ffffff;
+}
+
+.jc-plan__brand {
+  margin-top: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 19.5px;
+  letter-spacing: 1.56px;
+  text-transform: uppercase;
+  color: #5b5b63;
+}
+
+.jc-plan--dark .jc-plan__brand {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.jc-plan__media {
+  position: relative;
+  height: 200px;
+  margin-top: 30px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.jc-plan__points {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.jc-plan__points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 15px;
+  line-height: 24px;
+  color: #131315;
+}
+
+.jc-plan__points li + li {
+  padding-top: 16px;
+  border-top: 1px solid rgba(19, 19, 21, 0.1);
+}
+
+.jc-plan--dark .jc-plan__points li {
+  color: #ffffff;
+}
+
+.jc-plan--dark .jc-plan__points li + li {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.jc-plan__points svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* ── Calendar 2027 — one interactive route through the year ── */
+
+.jc-route {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .jc-route {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .jc-route {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.jc-route__quarter {
+  --jc-accent: #e8574c;
+  min-width: 0;
+}
+
+/* Figma quarter marker: 6x18 bar + Inter Bold 13, 1.56px tracking. */
+.jc-route__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 20px;
+}
+
+.jc-route__head::before {
   content: "";
   width: 6px;
   height: 18px;
@@ -2508,216 +2712,330 @@ body {
   background-color: var(--jc-accent);
 }
 
-.jc-quarter--dark .jc-quarter__label {
-  color: color-mix(in srgb, var(--jc-accent) 55%, #ffffff);
+.jc-route__q {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 19.5px;
+  letter-spacing: 1.56px;
+  color: var(--jc-accent);
 }
 
-.jc-quarter--dark .jc-quarter__label::before {
-  background-color: color-mix(in srgb, var(--jc-accent) 65%, #ffffff);
-}
-
-.jc-quarter__year {
+.jc-route__range {
+  margin-left: 4px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 1.98px;
+  text-transform: uppercase;
   color: #9a9aa2;
 }
 
-.jc-quarter--dark .jc-quarter__year {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.jc-month {
+.jc-route__months {
+  position: relative;
   display: grid;
-  grid-template-columns: 92px 1fr;
-  gap: 16px;
-  align-items: start;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--stroke);
+  grid-template-columns: repeat(var(--jc-months, 3), minmax(0, 1fr));
 }
 
-.jc-month:last-child {
-  border-bottom: 0;
+/* The rail: quarters sit edge to edge, so it reads as one line. */
+.jc-route__months::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: color-mix(in srgb, var(--jc-accent) 30%, #e6e8ea);
+  transition: background-color 0.2s ease;
 }
 
-.jc-quarter--dark .jc-month {
-  border-color: rgba(255, 255, 255, 0.1);
+.jc-route__quarter:has(.jc-route__month:hover) .jc-route__months::before {
+  background-color: color-mix(in srgb, var(--jc-accent) 55%, #e6e8ea);
 }
 
-.jc-month__name {
+.jc-route__month {
+  position: relative;
+  min-width: 0;
+  padding-right: 12px;
+  cursor: default;
+}
+
+.jc-route__node {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background-color: var(--jc-accent);
+  box-shadow: 0 0 0 4px #f7f5f1;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.jc-route__month:hover .jc-route__node {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 4px #f7f5f1,
+    0 0 0 7px color-mix(in srgb, var(--jc-accent) 22%, transparent);
+}
+
+.jc-route__month.is-empty .jc-route__node {
+  background-color: #f7f5f1;
+  border: 2px solid color-mix(in srgb, var(--jc-accent) 40%, #d8d5cc);
+}
+
+/* Figma month label: Inter Bold 11, 1.76px tracking, uppercase. */
+.jc-route__name {
+  margin-top: 18px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  line-height: 20.9px;
+  letter-spacing: 1.76px;
   text-transform: uppercase;
-  line-height: 1.9;
   color: #9a9aa2;
+  transition: color 0.2s ease;
 }
 
-.jc-quarter--dark .jc-month__name {
-  color: rgba(255, 255, 255, 0.5);
+.jc-route__month:hover .jc-route__name {
+  color: var(--jc-accent);
 }
 
-@media (max-width: 400px) {
-  .jc-month {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
+.jc-route__name abbr {
+  text-decoration: none;
 }
 
-.jc-city-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-  padding: 5px 12px 5px 10px;
+.jc-route__cities {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+/* City label: accent dot + Inter SemiBold, one line. */
+.jc-route__city {
+  position: relative;
+  max-width: 100%;
+  padding-left: 14px;
   font-size: 15px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  line-height: 24px;
+  letter-spacing: -0.15px;
+  white-space: nowrap;
   color: #131315;
-  background-color: color-mix(in srgb, var(--jc-accent) 10%, #ffffff);
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.jc-quarter--dark .jc-city-chip {
-  color: #ffffff;
-  background-color: color-mix(in srgb, var(--jc-accent) 24%, transparent);
-}
-
-.jc-city-dot {
+.jc-route__city::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
   width: 6px;
   height: 6px;
   border-radius: 999px;
   background-color: var(--jc-accent);
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
 }
 
-.jc-quarter--dark .jc-city-dot {
-  background-color: color-mix(in srgb, var(--jc-accent) 55%, #ffffff);
+.jc-route__month:hover .jc-route__city {
+  color: color-mix(in srgb, var(--jc-accent) 80%, #131315);
 }
 
-.jc-city-chip--link {
-  cursor: pointer;
+.jc-route__month:hover .jc-route__city::before {
+  transform: translateY(-50%) scale(1.35);
 }
 
-.jc-city-chip--link:hover,
-.jc-city-chip--link:focus-visible {
-  background-color: color-mix(in srgb, var(--jc-accent) 20%, #ffffff);
-  outline: none;
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .jc-route__city {
+    font-size: 14px;
+  }
 }
 
-.jc-quarter--dark .jc-city-chip--link:hover,
-.jc-quarter--dark .jc-city-chip--link:focus-visible {
-  background-color: color-mix(in srgb, var(--jc-accent) 38%, transparent);
-}
-
-.jc-city-arrow {
-  font-size: 13px;
-  color: var(--jc-accent);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.jc-quarter--dark .jc-city-arrow {
-  color: color-mix(in srgb, var(--jc-accent) 55%, #ffffff);
-}
-
-.jc-city-chip--link:hover .jc-city-arrow,
-.jc-city-chip--link:focus-visible .jc-city-arrow {
-  opacity: 1;
-}
-
-.jc-break {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 2px;
-  font-size: 14px;
+/* Figma empty month: Inter Medium, #9A9AA2. */
+.jc-route__dash {
+  margin-top: 8px;
+  font-size: 15px;
   font-weight: 500;
+  line-height: 24px;
   color: #9a9aa2;
 }
 
-.jc-quarter--dark .jc-break {
-  color: rgba(255, 255, 255, 0.42);
+@media (prefers-reduced-motion: reduce) {
+  .jc-route__node,
+  .jc-route__month:hover .jc-route__node {
+    transform: none;
+    transition: none;
+  }
 }
 
-/* ── Testimonial quote cards ────────────────────────────────── */
+/* Mobile: the rail turns vertical — quarter, then month by month. */
+@media (max-width: 767px) {
+  .jc-route__months {
+    grid-template-columns: 1fr;
+    row-gap: 22px;
+    padding-left: 30px;
+  }
 
-.jc-quote-card {
-  --jc-accent: #e8574c;
+  .jc-route__months::before {
+    top: 4px;
+    bottom: 4px;
+    left: 6px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .jc-route__node {
+    position: absolute;
+    top: 3px;
+    left: -30px;
+  }
+
+  .jc-route__name {
+    margin-top: 0;
+  }
+
+  .jc-route__cities {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 18px;
+    margin-top: 6px;
+  }
+
+  .jc-route__dash {
+    margin-top: 2px;
+  }
+}
+
+/* ── Testimonials (Figma composition, stronger execution) ───── */
+
+.jc-voice {
+  --jc-accent: #564ef0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 1px #eee9e2;
+}
+
+.jc-voice__stage {
   position: relative;
-  transition:
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+  height: 340px;
+  overflow: hidden;
+  background-color: #ffffff;
 }
 
-.jc-quote-card::before {
-  content: "";
+/* Figma watermark: the person's name, oversized, at 5% brand purple. */
+.jc-voice__watermark {
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 4px;
-  border-radius: 16px 16px 0 0;
-  background-color: var(--jc-accent);
+  top: 12px;
+  left: -6px;
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(93, 95, 240, 0.05);
+  pointer-events: none;
+  user-select: none;
 }
 
-.jc-quote-mark {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 44px;
-  line-height: 1;
+.jc-voice__portrait {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 58%;
+  height: 92%;
+}
+
+.jc-voice__meta {
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  left: 56%;
+  transform: translateY(-40%);
+}
+
+.jc-voice__logo {
+  height: 24px;
+  width: auto;
+}
+
+.jc-voice__name {
+  overflow-wrap: anywhere;
+  margin-top: 14px;
+  font-size: 28px;
   font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
   color: var(--jc-accent);
 }
 
-.jc-avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 999px;
-  background-color: var(--jc-accent);
-  box-shadow: 0 0 0 1px var(--stroke);
+.jc-voice__role {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #131315;
 }
 
-/* ── Sponsorship option cards ───────────────────────────────── */
-
-.jc-option-card {
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+/* Figma quote block: solid coral, white copy. */
+.jc-voice__quote {
+  position: relative;
+  flex: 1;
+  min-height: 190px;
+  padding: 46px 24px 26px;
+  background-color: #fe4c4c;
+  color: #ffffff;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .jc-option-card:hover {
-    transform: translateY(-6px);
-    box-shadow:
-      0 18px 48px rgba(0, 0, 0, 0.45),
-      0 0 0 1px rgba(255, 255, 255, 0.18);
+.jc-voice__mark {
+  position: absolute;
+  top: -22px;
+  left: 20px;
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.jc-voice__quote blockquote {
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: -0.3px;
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .jc-voice__name {
+    font-size: 22px;
   }
 }
 
-.jc-option-card:focus-within {
-  box-shadow:
-    0 18px 48px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(255, 255, 255, 0.18);
-}
+@media (max-width: 479px) {
+  .jc-voice__stage {
+    height: 300px;
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .jc-option-card,
-  .jc-option-card:hover {
-    transform: none;
+  .jc-voice__meta {
+    right: 16px;
+    left: 54%;
+  }
+
+  .jc-voice__name {
+    font-size: 19px;
   }
 }
 
-/* ── Partners in the Room ───────────────────────────────────── */
+/* ── Partners (Figma "Previous Co-hosts" row) ───────────────── */
 
 .jc-logo-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(28px, 4vw, 56px);
+  gap: 56px;
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: none;
@@ -2735,18 +3053,51 @@ body {
   height: 40px;
 }
 
-/* Optical balance: wordmarks and monograms read at the same weight. */
 .jc-logo-row__logo {
   width: auto;
   max-width: 132px;
-  height: clamp(20px, 2vw, 26px);
+  height: 26px;
   object-fit: contain;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1279px) {
   .jc-logo-row {
     justify-content: flex-start;
+    gap: 40px;
     margin-inline: calc(var(--page-padding) * -1);
     padding-inline: var(--page-padding);
   }
+}
+
+/* ── Become a Sponsor (Figma form section) ───────────────────── */
+
+.jc-sponsor-form .onboarding-page {
+  padding: 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.jc-sponsor-form .onboarding-page--compact {
+  min-height: 0;
+}
+
+.jc-sponsor-form .onboarding-page__shell {
+  gap: 30px;
+}
+
+.jc-sponsor-form .onboarding-form__header {
+  align-self: stretch;
+  align-items: center;
+  max-width: none;
+  text-align: center;
+}
+
+.jc-sponsor-form .onboarding-form__title {
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #242424;
+}
+
+.jc-sponsor-form .onboarding-form__subtitle:empty {
+  display: none;
 }

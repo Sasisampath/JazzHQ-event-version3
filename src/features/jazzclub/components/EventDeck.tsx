@@ -28,7 +28,7 @@ const DRAG_COMMIT = 0.18;
 const CLICK_SUPPRESS_DISTANCE = 6;
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 /** Entrance runs once on mount; after this the classes are dropped. */
-const ENTRANCE_MS = 600;
+const ENTRANCE_MS = 360;
 
 function sample(table: number[], distance: number) {
   const d = Math.min(distance, table.length - 1);

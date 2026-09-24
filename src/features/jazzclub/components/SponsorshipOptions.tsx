@@ -1,66 +1,84 @@
-import { SponsorCta } from "./SponsorCta";
+import Image from "next/image";
+import { SPONSOR_ID } from "../data/anchors";
 import {
   SPONSORSHIP_HEADING,
   SPONSORSHIP_OPTIONS,
   SPONSOR_CTA_LABEL,
 } from "../data/sponsors";
+import { SponsorCta } from "./SponsorCta";
 
-/**
- * Dark section, three flat cards. "Become a sponsor" reuses the existing
- * JazzHQ co-host/sponsor form — no second form is introduced.
- */
+/** Figma tick: 18px filled circle with a white check. */
+function Tick({ color }: { color: string }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path
+        d="M9 16.5a7.5 7.5 0 1 0 0-15 7.5 7.5 0 0 0 0 15Z"
+        fill={color}
+        stroke={color}
+        strokeWidth="1.125"
+      />
+      <path
+        d="M6 9.375 7.5 10.875 11.625 7.125"
+        stroke="#fff"
+        strokeWidth="1.125"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/** Figma V4 "Three simple ways": heading + CTA row, three cards side by side. */
 export function SponsorshipOptions() {
   return (
-    <section
-      aria-labelledby="sponsorship-heading"
-      className="jc-section jc-section--dark"
-    >
-      <div className="page-section">
-        <div className="mx-auto max-w-[var(--max-content)]">
-          <p className="jc-eyebrow">Sponsorship options</p>
-          <h2
-            id="sponsorship-heading"
-            className="jc-title mt-5 max-w-[20ch]"
-          >
+    <section aria-labelledby="sponsorship-heading" className="page-section">
+      <div className="mx-auto max-w-[var(--max-content)]">
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+          <h2 id="sponsorship-heading" className="jc-h2 max-w-[959px]">
             {SPONSORSHIP_HEADING}
           </h2>
+          <SponsorCta target={SPONSOR_ID}>{SPONSOR_CTA_LABEL}</SponsorCta>
+        </div>
 
-          <ul className="mt-14 grid gap-5 lg:grid-cols-3">
-            {SPONSORSHIP_OPTIONS.map((option) => (
-              <li
-                key={option.id}
-                className="jc-option-card flex h-full flex-col rounded-[28px] p-8 sm:p-10"
-                style={{ backgroundColor: option.surface, color: option.ink }}
-              >
-                <h3 className="text-[22px] font-bold leading-[1.2] tracking-[-0.02em] sm:text-2xl">
-                  {option.name}
-                </h3>
-                <p
-                  className="mt-2 text-[13px] font-semibold uppercase tracking-[0.12em]"
-                  style={{ color: option.muted }}
-                >
-                  {option.branding}
-                </p>
+        <ul className="mt-10 grid gap-5 lg:grid-cols-3">
+          {SPONSORSHIP_OPTIONS.map((option) => (
+            <li key={option.id} className={`jc-plan jc-plan--${option.tone}`}>
+              {option.tone === "dark" && (
+                <Image
+                  src="/assets/jazzclub/sponsorship/co-market-bg.webp"
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="pointer-events-none object-cover"
+                />
+              )}
+              <div className="relative">
+                <h3 className="jc-plan__title">{option.name}</h3>
+                <p className="jc-plan__brand">{option.branding}</p>
 
-                <ul className="mt-8 flex flex-col gap-4">
+                <div className="jc-plan__media">
+                  <Image
+                    src={option.image}
+                    alt={option.imageAlt}
+                    fill
+                    loading="lazy"
+                    sizes="(max-width: 1024px) 100vw, 400px"
+                    className="object-cover"
+                  />
+                </div>
+
+                <ul className="jc-plan__points">
                   {option.points.map((point) => (
-                    <li
-                      key={point}
-                      className="border-t pt-4 text-[15px] leading-[1.6] first:border-t-0 first:pt-0"
-                      style={{ borderColor: option.rule }}
-                    >
-                      {point}
+                    <li key={point}>
+                      <Tick color={option.tick} />
+                      <span>{point}</span>
                     </li>
                   ))}
                 </ul>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-12 flex justify-center lg:justify-start">
-            <SponsorCta variant="primary">{SPONSOR_CTA_LABEL}</SponsorCta>
-          </div>
-        </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

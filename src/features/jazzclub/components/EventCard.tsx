@@ -3,9 +3,25 @@ import {
   CTA_LABEL,
   ctaIsAction,
   eventCta,
+  eventStatus,
   formatEventDate,
   type JazzclubEvent,
 } from "../data/events";
+
+/** Compact state pills — secondary to the artwork, title and CTA. */
+function StatusPills({ event }: { event: JazzclubEvent }) {
+  const past = eventStatus(event) === "past";
+  return (
+    <span className="flex shrink-0 items-center gap-1.5">
+      {event.featured && !past && (
+        <span className="jc-status jc-status--featured">Featured</span>
+      )}
+      <span className={`jc-status ${past ? "jc-status--past" : "jc-status--upcoming"}`}>
+        {past ? "Past" : "Upcoming"}
+      </span>
+    </span>
+  );
+}
 
 type Props = {
   event: JazzclubEvent;
@@ -76,9 +92,12 @@ export function EventCard({ event, isActive }: Props) {
       </div>
 
       <div className="flex flex-1 flex-col px-1 pt-5">
-        <span className="text-[11px] font-semibold tracking-[0.28em] text-[#e8574c]">
-          {event.city.toUpperCase()}
-        </span>
+        <div className="flex items-center justify-between gap-3">
+          <span className="truncate text-[11px] font-semibold tracking-[0.28em] text-[#e8574c]">
+            {event.city.toUpperCase()}
+          </span>
+          <StatusPills event={event} />
+        </div>
         <h3 className="mt-2 text-lg font-semibold leading-snug text-[#131315]">
           {event.title}
         </h3>

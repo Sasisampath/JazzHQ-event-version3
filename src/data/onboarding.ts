@@ -122,6 +122,6 @@ export const SPONSOR_EVENTS_PAGE: OnboardingPageConfig = {
     },
   ],
   formTitle: "Become a Sponsor",
-  formSubtitle: "Tell us about your goals and we will match you to a room.",
+  formSubtitle: "",
   filloutId: "ah91Ye93Jrus",
 };

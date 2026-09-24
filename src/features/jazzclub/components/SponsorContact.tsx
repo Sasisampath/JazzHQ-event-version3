@@ -3,16 +3,15 @@ import { SPONSOR_EVENTS_PAGE } from "@/data/onboarding";
 import { SPONSOR_ID } from "../data/anchors";
 
 /**
- * The page's conversion point: the existing JazzHQ onboarding experience
- * (card video on the left, Fillout form on the right) with sponsor copy.
- * No second form implementation.
+ * Figma form section: centred heading over the existing onboarding layout
+ * (1100px, card video left, Fillout form right). No second form.
  */
 export function SponsorContact() {
   return (
     <section
       id={SPONSOR_ID}
-      aria-label="Become a sponsor"
-      className="jc-section--light scroll-mt-24 pb-4 pt-16 sm:pt-20"
+      aria-label="Become a Sponsor"
+      className="jc-sponsor-form scroll-mt-24"
     >
       <OnboardingFormPage config={SPONSOR_EVENTS_PAGE} />
     </section>

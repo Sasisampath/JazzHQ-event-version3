@@ -15,17 +15,24 @@ export const metadata: Metadata = pageSeo({
   path: "/events",
 });
 
-/** One page: attend a room, or sponsor one. */
+/**
+ * One page: attend a room, or sponsor one. Everything below the Events
+ * section sits on one Figma canvas with a single 100px section rhythm.
+ */
 export default function EventsPage() {
   return (
     <>
       <CinematicHero />
       <EventsSection />
-      <SponsorshipOptions />
-      <CalendarSection />
-      <JazzclubTestimonials />
-      <PartnersSection />
-      <SponsorContact />
+      <div className="jc-canvas">
+        <div className="jc-stack">
+          <SponsorshipOptions />
+          <CalendarSection />
+          <JazzclubTestimonials />
+          <PartnersSection />
+          <SponsorContact />
+        </div>
+      </div>
     </>
   );
 }

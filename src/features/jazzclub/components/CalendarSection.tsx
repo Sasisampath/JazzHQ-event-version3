@@ -5,39 +5,21 @@ import {
 } from "../data/calendar-2027";
 import { CalendarGrid } from "./CalendarGrid";
 
-/**
- * The full editorial calendar on /events. The explorer shows the same data
- * in its dark modal — both read from `calendar-2027.ts`.
- */
+/** Figma heading + supporting copy; the calendar itself is the web route. */
 export function CalendarSection() {
   return (
-    <section
-      aria-labelledby="calendar-2027-heading"
-      className="jc-section jc-section--light"
-    >
-      <div className="page-section">
-        <div className="mx-auto max-w-[var(--max-content)]">
-          <div className="max-w-[720px]">
-            <p className="jc-eyebrow">Calendar 2027</p>
-            <h2
-              id="calendar-2027-heading"
-              className="jc-title mt-5"
-            >
-              {CALENDAR_HEADING}
-            </h2>
-            <p className="jc-sub mt-4">
-              {CALENDAR_INTRO}
-            </p>
-          </div>
+    <section aria-labelledby="calendar-2027-heading" className="page-section">
+      <div className="mx-auto max-w-[var(--max-content)]">
+        <h2 id="calendar-2027-heading" className="jc-h2">
+          {CALENDAR_HEADING}
+        </h2>
+        <p className="jc-lead mt-3.5 max-w-[760px]">{CALENDAR_INTRO}</p>
 
-          <div className="mt-10 sm:mt-12">
-            <CalendarGrid tone="light" />
-          </div>
-
-          <p className="jc-body mt-8">
-            {CALENDAR_NOTE}
-          </p>
+        <div className="mt-10">
+          <CalendarGrid />
         </div>
+
+        <p className="jc-lead mt-10 text-[14px]">{CALENDAR_NOTE}</p>
       </div>
     </section>
   );
