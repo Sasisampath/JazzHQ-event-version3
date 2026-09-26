@@ -135,14 +135,19 @@ function ring(
   );
 }
 
-const DESKTOP_SLUGS = [
-  "room-01", "room-02", "room-03", "room-04", "room-05", "room-06",
-  "room-07", "room-08", "room-09", "room-10", "room-11", "room-13",
-];
+/**
+ * Approved JazzClub event photographs ("JazzClub events page hero section
+ * photos"), converted to jc-01…jc-22. DSC02556 and the frame showing old
+ * "Unwind" branding are deliberately not in this set.
+ */
+const DESKTOP_SLUGS = Array.from(
+  { length: 22 },
+  (_, i) => `jc-${String(i + 1).padStart(2, "0")}`,
+);
 
 const MOBILE_SLUGS = [
-  "room-01", "room-02", "room-03", "room-04", "room-05",
-  "room-06", "room-07", "room-08", "room-09",
+  "jc-01", "jc-02", "jc-04", "jc-06", "jc-07", "jc-09",
+  "jc-11", "jc-13", "jc-16", "jc-17", "jc-21", "jc-22",
 ];
 
 const DESKTOP_CARD_HEIGHT = 3.3;
@@ -164,7 +169,7 @@ export const DESKTOP_SCENE: SceneConfig = {
     settleEnd: 2.45,
     skipDuration: 0.22,
   },
-  idleSpin: 0.055,
+  idleSpin: 0.07,
 };
 
 export const MOBILE_SCENE: SceneConfig = {
@@ -183,7 +188,7 @@ export const MOBILE_SCENE: SceneConfig = {
     settleEnd: 2.25,
     skipDuration: 0.2,
   },
-  idleSpin: 0.042,
+  idleSpin: 0.055,
 };
 
 /** Path to the optimized archive photo for a given breakpoint. */

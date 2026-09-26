@@ -113,7 +113,7 @@ export function EventsSection() {
       <div className="page-section">
         <div className="mx-auto max-w-[var(--max-content)] text-center">
           <h2 id="events-heading" className="jc-title mx-auto max-w-[22ch]">
-            Find the next JazzClub room near you.
+            Find the next Jazz Club room near you.
           </h2>
 
           <div className="mx-auto mt-7 flex max-w-[900px] flex-wrap items-center justify-center gap-2.5 sm:gap-3">

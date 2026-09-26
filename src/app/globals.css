@@ -2554,6 +2554,14 @@ body {
   background-color: #d54a40;
 }
 
+.jc-cta--dark {
+  background-color: #242424;
+}
+
+.jc-cta--dark:hover {
+  background-color: #131315;
+}
+
 .jc-cta:focus-visible {
   outline: 2px solid #131315;
   outline-offset: 2px;
@@ -2670,244 +2678,6 @@ body {
   margin-top: 3px;
 }
 
-/* ── Calendar 2027 — one interactive route through the year ── */
-
-.jc-route {
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 40px;
-}
-
-@media (min-width: 768px) {
-  .jc-route {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 48px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .jc-route {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-.jc-route__quarter {
-  --jc-accent: #e8574c;
-  min-width: 0;
-}
-
-/* Figma quarter marker: 6x18 bar + Inter Bold 13, 1.56px tracking. */
-.jc-route__head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-bottom: 20px;
-}
-
-.jc-route__head::before {
-  content: "";
-  width: 6px;
-  height: 18px;
-  border-radius: 3px;
-  background-color: var(--jc-accent);
-}
-
-.jc-route__q {
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 19.5px;
-  letter-spacing: 1.56px;
-  color: var(--jc-accent);
-}
-
-.jc-route__range {
-  margin-left: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.98px;
-  text-transform: uppercase;
-  color: #9a9aa2;
-}
-
-.jc-route__months {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(var(--jc-months, 3), minmax(0, 1fr));
-}
-
-/* The rail: quarters sit edge to edge, so it reads as one line. */
-.jc-route__months::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: color-mix(in srgb, var(--jc-accent) 30%, #e6e8ea);
-  transition: background-color 0.2s ease;
-}
-
-.jc-route__quarter:has(.jc-route__month:hover) .jc-route__months::before {
-  background-color: color-mix(in srgb, var(--jc-accent) 55%, #e6e8ea);
-}
-
-.jc-route__month {
-  position: relative;
-  min-width: 0;
-  padding-right: 12px;
-  cursor: default;
-}
-
-.jc-route__node {
-  position: relative;
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 999px;
-  background-color: var(--jc-accent);
-  box-shadow: 0 0 0 4px #f7f5f1;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.jc-route__month:hover .jc-route__node {
-  transform: scale(1.25);
-  box-shadow:
-    0 0 0 4px #f7f5f1,
-    0 0 0 7px color-mix(in srgb, var(--jc-accent) 22%, transparent);
-}
-
-.jc-route__month.is-empty .jc-route__node {
-  background-color: #f7f5f1;
-  border: 2px solid color-mix(in srgb, var(--jc-accent) 40%, #d8d5cc);
-}
-
-/* Figma month label: Inter Bold 11, 1.76px tracking, uppercase. */
-.jc-route__name {
-  margin-top: 18px;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 20.9px;
-  letter-spacing: 1.76px;
-  text-transform: uppercase;
-  color: #9a9aa2;
-  transition: color 0.2s ease;
-}
-
-.jc-route__month:hover .jc-route__name {
-  color: var(--jc-accent);
-}
-
-.jc-route__name abbr {
-  text-decoration: none;
-}
-
-.jc-route__cities {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  margin-top: 8px;
-}
-
-/* City label: accent dot + Inter SemiBold, one line. */
-.jc-route__city {
-  position: relative;
-  max-width: 100%;
-  padding-left: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.15px;
-  white-space: nowrap;
-  color: #131315;
-  transition: color 0.2s ease;
-}
-
-.jc-route__city::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background-color: var(--jc-accent);
-  transform: translateY(-50%);
-  transition: transform 0.2s ease;
-}
-
-.jc-route__month:hover .jc-route__city {
-  color: color-mix(in srgb, var(--jc-accent) 80%, #131315);
-}
-
-.jc-route__month:hover .jc-route__city::before {
-  transform: translateY(-50%) scale(1.35);
-}
-
-@media (min-width: 1280px) and (max-width: 1535px) {
-  .jc-route__city {
-    font-size: 14px;
-  }
-}
-
-/* Figma empty month: Inter Medium, #9A9AA2. */
-.jc-route__dash {
-  margin-top: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #9a9aa2;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .jc-route__node,
-  .jc-route__month:hover .jc-route__node {
-    transform: none;
-    transition: none;
-  }
-}
-
-/* Mobile: the rail turns vertical — quarter, then month by month. */
-@media (max-width: 767px) {
-  .jc-route__months {
-    grid-template-columns: 1fr;
-    row-gap: 22px;
-    padding-left: 30px;
-  }
-
-  .jc-route__months::before {
-    top: 4px;
-    bottom: 4px;
-    left: 6px;
-    right: auto;
-    width: 2px;
-    height: auto;
-  }
-
-  .jc-route__node {
-    position: absolute;
-    top: 3px;
-    left: -30px;
-  }
-
-  .jc-route__name {
-    margin-top: 0;
-  }
-
-  .jc-route__cities {
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 18px;
-    margin-top: 6px;
-  }
-
-  .jc-route__dash {
-    margin-top: 2px;
-  }
-}
-
 /* ── Testimonials (Figma composition, stronger execution) ───── */
 
 .jc-voice {
@@ -2915,9 +2685,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-radius: 20px;
   background-color: #ffffff;
-  box-shadow: 0 0 0 1px #eee9e2;
 }
 
 .jc-voice__stage {
@@ -2938,7 +2706,7 @@ body {
   letter-spacing: -0.02em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: rgba(93, 95, 240, 0.05);
+  color: color-mix(in srgb, var(--jc-accent) 6%, transparent);
   pointer-events: none;
   user-select: none;
 }
@@ -2954,8 +2722,8 @@ body {
 .jc-voice__meta {
   position: absolute;
   top: 50%;
-  right: 22px;
-  left: 56%;
+  right: 16px;
+  left: 52%;
   transform: translateY(-40%);
 }
 
@@ -2965,14 +2733,17 @@ body {
 }
 
 .jc-voice__name {
-  overflow-wrap: anywhere;
   margin-top: 14px;
-  font-size: 28px;
+  font-size: clamp(20px, 1.75vw, 30px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--jc-accent);
+}
+
+.jc-voice__name span {
+  white-space: nowrap;
 }
 
 .jc-voice__role {
@@ -3008,11 +2779,7 @@ body {
   letter-spacing: -0.3px;
 }
 
-@media (max-width: 1279px) and (min-width: 1024px) {
-  .jc-voice__name {
-    font-size: 22px;
-  }
-}
+
 
 @media (max-width: 479px) {
   .jc-voice__stage {
@@ -3029,16 +2796,187 @@ body {
   }
 }
 
-/* ── Partners (Figma "Previous Co-hosts" row) ───────────────── */
+/* ── Calendar 2027 (Figma quarter cards) ─────────────────────── */
+
+.jc-q {
+  overflow: hidden;
+  border: 1px solid #e6e8ea;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
+.jc-q__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 20px 14px;
+  color: #ffffff;
+  background-color: var(--jc-q);
+}
+
+.jc-q__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 19.5px;
+  letter-spacing: 1.56px;
+}
+
+.jc-q__label::before {
+  content: "";
+  width: 6px;
+  height: 18px;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+.jc-q__year {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16.5px;
+  letter-spacing: 1.98px;
+}
+
+.jc-q__row {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e6e8ea;
+}
+
+.jc-q__row:last-child {
+  border-bottom: 0;
+}
+
+.jc-q__month {
+  flex: 0 0 92px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20.9px;
+  letter-spacing: 1.76px;
+  text-transform: uppercase;
+  color: #9a9aa2;
+}
+
+.jc-q__city {
+  position: relative;
+  border-radius: 999px;
+  padding: 5px 12px 5px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22.5px;
+  letter-spacing: -0.15px;
+  color: #131315;
+  background-color: var(--jc-chip);
+}
+
+.jc-q__city::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background-color: var(--jc-dot);
+  transform: translateY(-50%);
+}
+
+/* ── City strip (Figma 174x204 cards, auto-scrolling loop) ────── */
+
+.jc-strip {
+  overflow: hidden;
+}
+
+.jc-strip__track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  animation: jc-strip-scroll 55s linear infinite;
+}
+
+/* One full set (9 cards + 9 gaps) — the second set lands exactly where
+   the first began, so the loop never jumps. */
+@keyframes jc-strip-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-9 * (174px + 30px)));
+  }
+}
+
+.jc-strip:hover .jc-strip__track,
+.jc-strip:focus-within .jc-strip__track,
+.jc-strip:active .jc-strip__track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jc-strip {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .jc-strip__track {
+    animation: none;
+  }
+}
+
+.jc-city {
+  position: relative;
+  flex: 0 0 174px;
+  height: 204px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.jc-city__shade {
+  position: absolute;
+  inset: 53% 0 0;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0%, #121212 80%);
+}
+
+.jc-city__meta {
+  position: absolute;
+  inset: 57.8% 12px 7.8% 19px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.jc-city__icon {
+  display: inline-flex;
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(2.5px);
+}
+
+.jc-city__icon img {
+  width: 36px;
+  height: 36px;
+}
+
+.jc-city__name {
+  font-size: 16.7px;
+  line-height: 25px;
+  color: #ffffff;
+}
+
+/* ── Previous Co-hosts (Figma full-width white band) ────────── */
 
 .jc-logo-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 56px;
+  gap: 50px;
+  padding: 10px var(--page-padding);
   overflow-x: auto;
-  padding-bottom: 4px;
   scrollbar-width: none;
+  background-color: #ffffff;
 }
 
 .jc-logo-row::-webkit-scrollbar {
@@ -3049,55 +2987,87 @@ body {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  justify-content: center;
-  height: 40px;
+  height: 55px;
 }
 
 .jc-logo-row__logo {
   width: auto;
-  max-width: 132px;
-  height: 26px;
+  max-width: 180px;
+  height: 32px;
   object-fit: contain;
 }
 
-@media (max-width: 1279px) {
+@media (max-width: 1399px) {
   .jc-logo-row {
     justify-content: flex-start;
-    gap: 40px;
-    margin-inline: calc(var(--page-padding) * -1);
-    padding-inline: var(--page-padding);
+    gap: 36px;
+  }
+
+  .jc-logo-row__logo {
+    height: 26px;
   }
 }
 
-/* ── Become a Sponsor (Figma form section) ───────────────────── */
+/* ── Become a Co-Host (Figma video | form pair) ──────────────── */
 
-.jc-sponsor-form .onboarding-page {
-  padding: 0;
-  font-family: var(--font-inter), system-ui, sans-serif;
+.jc-pair {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 35px;
 }
 
-.jc-sponsor-form .onboarding-page--compact {
-  min-height: 0;
+.jc-pair__video,
+.jc-pair__form {
+  height: 720px;
+  overflow: hidden;
+  border-radius: 12px;
 }
 
-.jc-sponsor-form .onboarding-page__shell {
-  gap: 30px;
+.jc-pair__video {
+  flex: 0 1 550px;
+  background-color: #0e0e0d;
 }
 
-.jc-sponsor-form .onboarding-form__header {
-  align-self: stretch;
-  align-items: center;
+.jc-pair__video iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.jc-pair__form {
+  flex: 0 1 515px;
+  background-color: #ffffff;
+}
+
+.jc-pair__form .onboarding-fillout__embed,
+.jc-pair__form .onboarding-fillout__iframe {
+  height: 100%;
   max-width: none;
-  text-align: center;
 }
 
-.jc-sponsor-form .onboarding-form__title {
-  font-size: clamp(28px, 3.2vw, 40px);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: #242424;
+.jc-pair__form .onboarding-fillout__iframe {
+  min-height: 0;
+  border-radius: 0;
 }
 
-.jc-sponsor-form .onboarding-form__subtitle:empty {
-  display: none;
+@media (max-width: 1023px) {
+  .jc-pair {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .jc-pair__video,
+  .jc-pair__form {
+    flex: none;
+    width: 100%;
+    max-width: 550px;
+  }
+
+  .jc-pair__video {
+    height: auto;
+    aspect-ratio: 9 / 16;
+    max-height: 720px;
+  }
 }

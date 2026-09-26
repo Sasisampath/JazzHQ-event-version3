@@ -3,11 +3,11 @@
  * and both carry `scroll-mt-*` so the fixed navbar never covers the heading.
  */
 export const EVENTS_ID = "events";
-export const SPONSOR_ID = "become-a-sponsor";
+export const SPONSOR_ID = "become-a-co-host";
 
 /** The two CTA labels used across the page — no other variants. */
 export const ATTEND_LABEL = "Attend Our Event";
-export const SPONSOR_LABEL = "Become a Sponsor";
+export const SPONSOR_LABEL = "Become a Co-host";
 
 export function scrollToSection(
   event: React.MouseEvent<HTMLAnchorElement>,

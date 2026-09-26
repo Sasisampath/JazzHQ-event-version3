@@ -14,11 +14,11 @@ export function JazzclubTestimonials() {
   return (
     <section aria-labelledby="testimonials-heading" className="page-section">
       <div className="mx-auto max-w-[var(--max-content)]">
-        <h2 id="testimonials-heading" className="jc-h2">
+        <h2 id="testimonials-heading" className="jc-h2 text-center">
           {TESTIMONIALS_HEADING}
         </h2>
 
-        <ul className="mt-5 grid gap-5 lg:grid-cols-3">
+        <ul className="mt-5 grid gap-[17px] lg:grid-cols-3">
           {JAZZCLUB_TESTIMONIALS.map((person) => (
             <li key={person.id} className="flex">
               <figure
@@ -52,15 +52,22 @@ export function JazzclubTestimonials() {
                         className="jc-voice__logo"
                       />
                     )}
-                    <p className="jc-voice__name">{person.name}</p>
-                    <p className="jc-voice__role">
-                      {person.role} | {person.company}
+                    <p className="jc-voice__name">
+                      {person.name.split(" ").map((part) => (
+                        <span key={part} className="block">
+                          {part}
+                        </span>
+                      ))}
                     </p>
+                    <p className="jc-voice__role">{person.role}</p>
                   </figcaption>
                 </div>
 
                 {person.quote && (
-                  <div className="jc-voice__quote">
+                  <div
+                    className="jc-voice__quote"
+                    style={{ backgroundColor: person.quoteBg }}
+                  >
                     <span aria-hidden="true" className="jc-voice__mark">
                       “
                     </span>

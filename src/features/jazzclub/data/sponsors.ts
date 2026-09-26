@@ -1,67 +1,68 @@
-/** Editorial content for the Sponsorship section. */
+/** Co-hosting options — copy, colours and image mapping from the latest Figma. */
 
-export const SPONSORSHIP_HEADING = "Three simple ways to own the conversation.";
+export const COHOST_HEADING = "Co-hosting options";
+export const COHOST_INTRO = "Three simple ways to own the conversation";
+export const COHOST_CTA_LABEL = "Become a co-host";
 
-export type SponsorshipOption = {
+export type CohostOption = {
   id: string;
   name: string;
-  branding: string;
+  tagline: string;
   points: string[];
   /** Figma card surface. */
-  tone: "white" | "lilac" | "dark";
+  surface: string;
   /** Figma bullet tick colour. */
   tick: string;
-  /** Archive photograph for the card's image slot. */
   image: string;
   imageAlt: string;
 };
 
-export const SPONSORSHIP_OPTIONS: SponsorshipOption[] = [
+export const COHOST_OPTIONS: CohostOption[] = [
   {
     id: "white-labelled",
     name: "White labelled",
-    branding: "No JazzHQ branding",
+    tagline: "Your name on the door, none of ours.",
     points: [
-      "One sponsor owns the event narrative",
-      "Audience built around sponsor ICP",
-      "Workshop / demo / discussion framed around sponsor category",
+      "No JazzHQ branding, the room is entirely yours",
+      "One co-host owns the event narrative",
+      "Audience built around your ICP",
+      "Workshop / demo / discussion framed around your category",
       "Priority introductions and follow-up",
     ],
-    tone: "white",
-    tick: "#14ae5d",
-    image: "/assets/jazzclub/cinematic/room-05.webp",
-    imageAlt: "Speakers leading a JazzClub room discussion",
+    surface: "#ffffff",
+    tick: "#242424",
+    image: "/assets/jazzclub/cohost/white-labelled.webp",
+    imageAlt: "A co-host speaking at a JazzClub room",
   },
   {
     id: "exclusive",
     name: "Exclusive",
-    branding: "JazzHQ branded",
+    tagline: "Our name opens it, yours runs the room.",
     points: [
-      "One sponsor owns the event narrative",
-      "Audience built around sponsor ICP",
-      "Workshop / demo / discussion framed around sponsor category",
+      "JazzHQ branded, you get our credibility and our audience's trust, still telling your story",
+      "One co-host owns the event narrative",
+      "Audience built around your ICP",
+      "Workshop / demo / discussion framed around your category",
       "Priority introductions and follow-up",
     ],
-    tone: "lilac",
+    surface: "#edecff",
     tick: "#564ef0",
-    image: "/assets/jazzclub/cinematic/room-06.webp",
-    imageAlt: "An attendee speaking at a JazzClub evening",
+    image: "/assets/jazzclub/cohost/exclusive.webp",
+    imageAlt: "Attendees at an exclusive JazzClub evening",
   },
   {
     id: "co-market",
     name: "Co-market",
-    branding: "JazzHQ branded",
+    tagline: "Split the room, double the reach.",
     points: [
-      "Two complementary sponsors share room and cost",
+      "Two complementary co-hosts share room and cost",
       "Broader market conversation without competitor conflict",
       "Joint promotion and content distribution",
       "Shared attendee engagement",
     ],
-    tone: "dark",
-    tick: "#fe4c4c",
-    image: "/assets/jazzclub/cinematic/room-03.webp",
-    imageAlt: "Partners together at a JazzClub gathering",
+    surface: "#ffe8e9",
+    tick: "#e5484d",
+    image: "/assets/jazzclub/cohost/co-market.webp",
+    imageAlt: "Co-hosts and guests in conversation at a JazzClub event",
   },
 ];
-
-export const SPONSOR_CTA_LABEL = "Become a Sponsor";

@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { SPONSOR_ID } from "../data/anchors";
 import {
-  SPONSORSHIP_HEADING,
-  SPONSORSHIP_OPTIONS,
-  SPONSOR_CTA_LABEL,
+  COHOST_CTA_LABEL,
+  COHOST_HEADING,
+  COHOST_INTRO,
+  COHOST_OPTIONS,
 } from "../data/sponsors";
 import { SponsorCta } from "./SponsorCta";
 
@@ -28,54 +29,52 @@ function Tick({ color }: { color: string }) {
   );
 }
 
-/** Figma V4 "Three simple ways": heading + CTA row, three cards side by side. */
+/** Figma "Co-hosting options": heading + intro + CTA, three equal cards. */
 export function SponsorshipOptions() {
   return (
-    <section aria-labelledby="sponsorship-heading" className="page-section">
+    <section aria-labelledby="cohost-heading" className="page-section">
       <div className="mx-auto max-w-[var(--max-content)]">
-        <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-          <h2 id="sponsorship-heading" className="jc-h2 max-w-[959px]">
-            {SPONSORSHIP_HEADING}
-          </h2>
-          <SponsorCta target={SPONSOR_ID}>{SPONSOR_CTA_LABEL}</SponsorCta>
+        <div className="flex flex-col items-start justify-between gap-6 md:flex-row">
+          <div className="pt-1.5">
+            <h2 id="cohost-heading" className="jc-h2">
+              {COHOST_HEADING}
+            </h2>
+            <p className="jc-lead mt-3.5">{COHOST_INTRO}</p>
+          </div>
+          <SponsorCta target={SPONSOR_ID} tone="dark">
+            {COHOST_CTA_LABEL}
+          </SponsorCta>
         </div>
 
-        <ul className="mt-10 grid gap-5 lg:grid-cols-3">
-          {SPONSORSHIP_OPTIONS.map((option) => (
-            <li key={option.id} className={`jc-plan jc-plan--${option.tone}`}>
-              {option.tone === "dark" && (
+        <ul className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
+          {COHOST_OPTIONS.map((option) => (
+            <li
+              key={option.id}
+              className="jc-plan"
+              style={{ backgroundColor: option.surface }}
+            >
+              <h3 className="jc-plan__title">{option.name}</h3>
+              <p className="jc-plan__brand">{option.tagline}</p>
+
+              <div className="jc-plan__media">
                 <Image
-                  src="/assets/jazzclub/sponsorship/co-market-bg.webp"
-                  alt=""
+                  src={option.image}
+                  alt={option.imageAlt}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 33vw"
-                  className="pointer-events-none object-cover"
+                  loading="lazy"
+                  sizes="(max-width: 1024px) 100vw, 400px"
+                  className="object-cover"
                 />
-              )}
-              <div className="relative">
-                <h3 className="jc-plan__title">{option.name}</h3>
-                <p className="jc-plan__brand">{option.branding}</p>
-
-                <div className="jc-plan__media">
-                  <Image
-                    src={option.image}
-                    alt={option.imageAlt}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 1024px) 100vw, 400px"
-                    className="object-cover"
-                  />
-                </div>
-
-                <ul className="jc-plan__points">
-                  {option.points.map((point) => (
-                    <li key={point}>
-                      <Tick color={option.tick} />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
+
+              <ul className="jc-plan__points">
+                {option.points.map((point) => (
+                  <li key={point}>
+                    <Tick color={option.tick} />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>

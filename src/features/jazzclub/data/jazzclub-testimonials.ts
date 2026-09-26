@@ -16,8 +16,10 @@ export type JazzclubTestimonial = {
   quote: string | null;
   /** Company mark already in the project, or null. */
   logo: string | null;
-  /** Name accent (Figma: JazzHQ purple). */
+  /** Figma accent: name colour and watermark tint. */
   panel: string;
+  /** Figma quote block fill. */
+  quoteBg: string;
 };
 
 export const TESTIMONIALS_HEADING = "Don’t take our word for it.";
@@ -33,7 +35,8 @@ export const JAZZCLUB_TESTIMONIALS: JazzclubTestimonial[] = [
     quote:
       "The evening has been fantastic, lots of lived experiences from people. Loved working with the Jazz HQ team towards curating this event and executing today wonderfully.",
     logo: "/assets/logos/hubspot.svg",
-    panel: "#564ef0",
+    panel: "#e5484d",
+    quoteBg: "#fe4c4c",
   },
   {
     id: "ken-yeung",
@@ -44,7 +47,8 @@ export const JAZZCLUB_TESTIMONIALS: JazzclubTestimonial[] = [
     quote:
       "A huge shoutout to JazzHQ, the \u2018Octopus\u2019 of the day, for connecting people and sparking real opportunities.",
     logo: "/assets/logos/wati.svg",
-    panel: "#564ef0",
+    panel: "#14ae5d",
+    quoteBg: "#14ae5d",
   },
   {
     id: "chhavi-porwal",
@@ -55,11 +59,12 @@ export const JAZZCLUB_TESTIMONIALS: JazzclubTestimonial[] = [
     quote:
       "I'm really proud of the partnership we've built with JazzHQ and I look forward to working with them in the future.",
     logo: "/assets/testimonials/logo-monday.svg",
-    panel: "#564ef0",
+    panel: "#5d5ff0",
+    quoteBg: "#564ef0",
   },
 ];
 
-/** Real partner marks already in the project. Nothing fabricated. */
+/** Figma "Previous Co-hosts include" row, in Figma order. Full colour. */
 export const PARTNER_LOGOS = [
   { name: "monday.com", src: "/assets/logos/monday.svg" },
   { name: "HubSpot", src: "/assets/logos/hubspot-trusted.svg" },
@@ -69,4 +74,5 @@ export const PARTNER_LOGOS = [
   { name: "SeamlessHR", src: "/assets/logos/seamlesshr.svg" },
   { name: "ElevenLabs", src: "/assets/logos/elevenlabs.svg" },
   { name: "SurveySparrow", src: "/assets/logos/surveysparrow.png" },
+  { name: "Wrike", src: "/assets/logos/wrike.svg" },
 ];

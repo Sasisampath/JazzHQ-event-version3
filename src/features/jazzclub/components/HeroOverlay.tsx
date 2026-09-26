@@ -61,11 +61,20 @@ export function HeroOverlay({ phase, showPlaque, fastSettle, onSkip }: Props) {
           }`}
         >
           <p className="mt-8 max-w-[34ch] text-balance text-base leading-relaxed text-white/85 sm:text-lg">
-            Curated AI GTM rooms for founders, operators and partners.
+            Invite-only rooms where AI founders, operators, and partners close real deals.
           </p>
 
-          <div className="pointer-events-auto mt-8 flex flex-col-reverse items-center gap-3 sm:flex-row sm:gap-4">
-            {/* Secondary — left. */}
+          <div className="pointer-events-auto mt-8 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+            {/* Primary — left (Figma). */}
+            <a
+              href={`#${EVENTS_ID}`}
+              onClick={(event) => scrollToSection(event, EVENTS_ID)}
+              className="inline-flex items-center gap-2 rounded-full bg-[#e8574c] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(232,87,76,0.35)] transition hover:bg-[#d54a40] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              {ATTEND_LABEL}
+              <span aria-hidden="true">→</span>
+            </a>
+            {/* Secondary — right (Figma). */}
             <a
               href={`#${SPONSOR_ID}`}
               onClick={(event) => scrollToSection(event, SPONSOR_ID)}
@@ -75,15 +84,6 @@ export function HeroOverlay({ phase, showPlaque, fastSettle, onSkip }: Props) {
               <span aria-hidden="true">→</span>
             </a>
 
-            {/* Primary — right. */}
-            <a
-              href={`#${EVENTS_ID}`}
-              onClick={(event) => scrollToSection(event, EVENTS_ID)}
-              className="inline-flex items-center gap-2 rounded-full bg-[#e8574c] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_rgba(232,87,76,0.35)] transition hover:bg-[#d54a40] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              {ATTEND_LABEL}
-              <span aria-hidden="true">→</span>
-            </a>
           </div>
         </div>
       </div>
